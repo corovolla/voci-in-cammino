@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coro Voci in cammino</title>
+<meta name="theme-color" content="#13203a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Voci in cammino">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#13203a; --navy-2:#1d2d4f; --navy-3:#2a3c63; --ivory:#f6f3ed; --paper:#ffffff; --ink:#1a1e29; --muted:#6a6f7d; --line:#e6e0d4; --line-2:#efeae1;
+  --gold:#b48f55; --gold-2:#8d6c38; --gold-soft:#f5eddf; --danger:#a23b3b; --ok:#3d7a4f;
+  --r:16px; --sh:0 1px 2px rgba(19,32,58,.04),0 8px 28px rgba(19,32,58,.06);
+  --serif:"Cormorant Garamond",Georgia,serif; --sans:Inter,system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ivory);color:var(--ink);font:15px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+h1,h2,h3{margin:0;font-weight:600}
+.serif{font-family:var(--serif)}
+.eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.muted{color:var(--muted)}
+svg{flex:0 0 auto}
+
+/* ===== Login ===== */
+.login{min-height:100vh;display:grid;grid-template-columns:minmax(320px,44%) 1fr}
+.login-side{background:radial-gradient(120% 90% at 0% 0%,var(--navy-3) 0%,var(--navy) 55%,#0d172b 100%);color:#efe9dd;padding:56px 52px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.login-side .lines{position:absolute;left:-10%;right:-10%;top:58%;opacity:.13}
+.login-side h1{font-family:var(--serif);font-size:54px;line-height:1.02;font-weight:600;margin:14px 0 14px;color:#fff}
+.login-side h1 em{font-style:italic;font-weight:500;color:#e8d3ac}
+.login-side .dir{font-size:15px;color:#c9c3b6}
+.login-side .foot{font-size:12.5px;color:#9aa2b5;position:relative}
+.login-main{display:flex;flex-direction:column;justify-content:center;padding:56px clamp(24px,6vw,80px)}
+.login-main h2{font-family:var(--serif);font-size:34px;margin:6px 0 6px}
+.login-main p.lead{color:var(--muted);margin:0 0 28px}
+.roles{display:flex;flex-direction:column;gap:12px;max-width:520px}
+.role{display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;text-align:left;cursor:pointer;box-shadow:var(--sh);transition:border-color .15s,transform .15s}
+.role:hover{border-color:var(--gold);transform:translateX(3px)}
+.role .ic{width:46px;height:46px;border-radius:12px;background:var(--gold-soft);color:var(--gold-2);display:grid;place-items:center}
+.role .tx{flex:1}
+.role h3{font-size:16px;font-weight:600}
+.role p{margin:2px 0 0;color:var(--muted);font-size:13.5px}
+.role .ar{color:var(--gold)}
+.notice{max-width:520px;margin-top:20px;background:var(--gold-soft);border:1px solid #eadcc1;color:#6e5426;padding:12px 14px;border-radius:12px;font-size:14px}
+
+/* ===== Shell ===== */
+.side{position:fixed;inset:0 auto 0 0;width:256px;background:linear-gradient(180deg,var(--navy) 0%,#0f1a30 100%);color:#e8e3d8;display:flex;flex-direction:column;padding:28px 18px 20px;z-index:20}
+.side .brand{padding:0 10px 24px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:16px}
+.side .brand .eyebrow{color:#d3b27a;font-size:10.5px;line-height:1.5}
+.side .brand .name{font-family:var(--serif);font-size:27px;line-height:1.08;color:#fff;margin:8px 0 6px;font-weight:600}
+.side .brand .name em{font-style:italic;font-weight:500;color:#ecd8b2}
+.side .brand .dir{font-size:12.5px;color:#a9b0c0}
+.nav{display:flex;flex-direction:column;gap:2px;flex:1}
+.nav button{display:flex;align-items:center;gap:12px;background:none;border:0;color:#c9cdd8;padding:11px 12px;border-radius:10px;cursor:pointer;font-weight:500;text-align:left;position:relative}
+.nav button:hover{background:rgba(255,255,255,.05);color:#fff}
+.nav button.on{background:rgba(255,255,255,.09);color:#fff}
+.nav button.on::before{content:"";position:absolute;left:-18px;top:9px;bottom:9px;width:3px;border-radius:0 3px 3px 0;background:var(--gold)}
+.side .me{border-top:1px solid rgba(255,255,255,.08);padding:16px 10px 0;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.side .me .who{font-size:12px;color:#a9b0c0}
+.side .me .who b{display:block;color:#fff;font-size:14px;font-weight:600}
+.side .me button{background:rgba(255,255,255,.07);border:0;color:#d9dce4;border-radius:8px;padding:7px 10px;cursor:pointer;font-size:13px}
+.side .me button:hover{background:rgba(255,255,255,.13)}
+
+.main{margin-left:256px;min-height:100vh}
+.content{max-width:1000px;margin:0 auto;padding:40px 48px 80px}
+.topbar,.bottomnav{display:none}
+
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.page-head h1{font-family:var(--serif);font-size:40px;line-height:1.05;margin-top:6px}
+.page-head .sub{color:var(--muted);margin-top:6px;font-size:14.5px}
+
+.btn{border:0;border-radius:10px;padding:10px 16px;font-weight:600;cursor:pointer;background:var(--navy);color:#fff;display:inline-flex;align-items:center;gap:8px;font-size:14px;white-space:nowrap}
+.btn:hover{background:var(--navy-2)}
+.btn.gold{background:var(--gold);color:#fff}
+.btn.gold:hover{background:var(--gold-2)}
+.btn.ghost{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold-2)}
+.btn.danger{background:var(--danger)}
+.btn.sm{padding:7px 12px;font-size:13px}
+.btn:disabled{opacity:.55;cursor:default}
+.lnk{background:none;border:0;padding:4px 6px;color:var(--muted);cursor:pointer;font-size:13px;border-radius:6px}
+.lnk:hover{color:var(--gold-2);background:var(--gold-soft)}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+.pad{padding:20px 22px}
+.grid2{display:grid;grid-template-columns:1.6fr 1fr;gap:20px;align-items:start}
+.stack{display:flex;flex-direction:column;gap:12px}
+.sec-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:30px 0 12px}
+.sec-h h2{font-family:var(--serif);font-size:24px}
+.warn{background:var(--gold-soft);border:1px solid #eadcc1;color:#6e5426;padding:11px 14px;border-radius:12px;font-size:14px;margin-bottom:16px}
+.empty{text-align:center;padding:44px 24px;color:var(--muted);border:1.5px dashed var(--line);border-radius:var(--r);background:rgba(255,255,255,.5)}
+.empty b{display:block;font-family:var(--serif);font-size:22px;color:var(--ink);font-weight:600;margin-bottom:4px}
+.loading{color:var(--muted);text-align:center;padding:30px}
+
+/* tempo chips (colori liturgici) */
+.tl{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px 3px 7px;border-radius:999px;background:var(--line-2);color:#4b5060;white-space:nowrap}
+.tl i{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block}
+.tl.ordinario{color:#2f6a43;background:#e6f0e8}.tl.avvento,.tl.quaresima{color:#5a3e8c;background:#ece6f5}
+.tl.natale,.tl.pasqua{color:#8d6c38;background:#f5eddf}.tl.pentecoste{color:#a12f2f;background:#f7e3e1}.tl.mariano{color:#2f5f93;background:#e2ecf7}
+
+/* ===== Domenica ===== */
+.hero{background:radial-gradient(130% 120% at 100% 0%,var(--navy-3) 0%,var(--navy) 50%,#0e182d 100%);color:#fff;border-radius:22px;padding:30px 32px;position:relative;overflow:hidden;box-shadow:0 18px 40px rgba(19,32,58,.18)}
+.hero .lines{position:absolute;right:-40px;bottom:18px;width:60%;opacity:.12}
+.hero .eyebrow{color:#dcbd86}
+.hero h2{font-family:var(--serif);font-size:38px;line-height:1.08;margin:8px 0 10px;font-weight:600}
+.hero .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;color:#c8cdd9;font-size:14px;position:relative}
+.hero .tl{background:rgba(255,255,255,.1);color:#f1e3c6}
+.hero .acts{position:absolute;top:22px;right:22px;display:flex;gap:6px}
+.hero .acts button{background:rgba(255,255,255,.1);border:0;color:#fff;border-radius:8px;padding:7px 11px;cursor:pointer;font-size:13px}
+.hero .acts button:hover{background:rgba(255,255,255,.18)}
+.hero .note{margin-top:14px;color:#dfe2ea;font-size:14px;white-space:pre-wrap;position:relative}
+.prog{margin-top:-14px;position:relative;padding:8px 0}
+.prow{display:grid;grid-template-columns:190px 1fr auto;gap:16px;align-items:center;padding:14px 24px;border-top:1px solid var(--line-2)}
+.prow:first-child{border-top:0}
+.prow .mo{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-2)}
+.prow .ti{font-family:var(--serif);font-size:21px;font-weight:600;line-height:1.2}
+.prow .au{color:var(--muted);font-size:13px;margin-top:1px}
+.prow .ac{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.prow audio{grid-column:2/4;width:100%;height:36px}
+.pill-btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;color:var(--navy);text-decoration:none;cursor:pointer;white-space:nowrap}
+.pill-btn:hover{border-color:var(--gold);color:var(--gold-2)}
+.mini{display:flex;gap:14px;align-items:center;padding:14px 18px;border-top:1px solid var(--line-2)}
+.mini:first-child{border-top:0}
+.mini .dt{flex:0 0 48px;text-align:center}
+.mini .dt b{display:block;font-family:var(--serif);font-size:26px;line-height:1;color:var(--navy)}
+.mini .dt span{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.mini .tx{flex:1;min-width:0}
+.mini .tx b{font-weight:600}
+.mini .tx div{color:var(--muted);font-size:13px}
+.side-card h3{font-family:var(--serif);font-size:20px;padding:16px 18px 4px}
+.plist .item{display:flex;align-items:center;gap:14px;padding:14px 18px;border-top:1px solid var(--line-2);cursor:pointer}
+.plist .item:first-child{border-top:0}
+.plist .item:hover{background:#fbf9f5}
+.plist .item.sel{background:var(--gold-soft)}
+
+/* ===== Calendario ===== */
+.month{font-family:var(--serif);font-style:italic;font-size:21px;color:var(--gold-2);margin:24px 0 10px;text-transform:capitalize}
+.month:first-child{margin-top:0}
+.appt{display:flex;gap:18px;align-items:flex-start;padding:18px 20px}
+.appt .dt{flex:0 0 58px;text-align:center;border-right:1px solid var(--line);padding-right:16px}
+.appt .dt b{display:block;font-family:var(--serif);font-size:34px;line-height:1;color:var(--navy)}
+.appt .dt span{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.appt .bd{flex:1;min-width:0}
+.appt h3{font-size:16.5px;font-weight:600}
+.appt .mt{display:flex;flex-wrap:wrap;gap:4px 16px;color:var(--muted);font-size:13.5px;margin-top:4px}
+.appt .mt span{display:inline-flex;align-items:center;gap:5px}
+.appt .nt{margin-top:8px;font-size:14px;white-space:pre-wrap}
+.tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--line-2);color:#555b6a;margin-left:8px;vertical-align:2px}
+.tag.Concerto{background:var(--gold-soft);color:var(--gold-2)}.tag.Prova{background:#e6ecf5;color:#2d4a7a}.tag.Celebrazione{background:#e6f0e8;color:#2f6a43}
+.past .appt{opacity:.55}
+
+/* ===== Repertorio ===== */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.filters .srch{flex:1 1 260px;position:relative}
+.filters .srch svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.filters input,.filters select{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper);outline:none;width:100%}
+.filters .srch input{padding-left:38px}
+.filters select{width:auto}
+.filters input:focus,.filters select:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+.syncbar{display:flex;align-items:center;gap:10px;justify-content:space-between;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:13.5px;color:var(--muted)}
+.syncbar .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);display:inline-block;margin-right:8px}
+.syncbar .dot.busy{background:var(--gold);animation:pulse 1s infinite}
+.syncbar .dot.err{background:var(--danger)}
+@keyframes pulse{50%{opacity:.3}}
+details.grp{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);margin-bottom:10px;box-shadow:var(--sh);overflow:hidden}
+details.grp summary{list-style:none;cursor:pointer;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+details.grp summary::-webkit-details-marker{display:none}
+details.grp summary h3{font-family:var(--serif);font-size:21px}
+details.grp summary .n{color:var(--muted);font-size:13px;display:flex;align-items:center;gap:10px}
+details.grp summary .chev{transition:transform .2s}
+details.grp[open] summary .chev{transform:rotate(90deg)}
+details.grp[open] summary{border-bottom:1px solid var(--line-2)}
+.canto{display:flex;align-items:center;gap:12px;padding:11px 20px;border-top:1px solid var(--line-2)}
+.canto:first-of-type{border-top:0}
+.canto .bd{flex:1;min-width:0}
+.canto .tt{font-weight:500;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.canto .au{color:var(--muted);font-size:13px}
+.folder{display:flex;align-items:center;gap:14px;padding:16px 20px}
+.folder .ic{width:42px;height:42px;border-radius:11px;background:var(--gold-soft);color:var(--gold-2);display:grid;place-items:center}
+.folder .bd{flex:1;min-width:0}
+.folder .bd b{font-weight:600}
+.folder .bd div{color:var(--muted);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ===== Audio ===== */
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.chip{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:7px 14px;cursor:pointer;font-size:13px;font-weight:500}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.aud{padding:18px 20px}
+.aud .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.aud h3{font-size:16px;font-weight:600}
+.aud .mt{color:var(--muted);font-size:13px;display:flex;gap:4px 14px;flex-wrap:wrap;margin-top:3px}
+.aud audio{width:100%;margin-top:12px;height:40px}
+.aud .nt{margin-top:8px;font-size:14px;white-space:pre-wrap}
+
+/* ===== Settings ===== */
+.set-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 22px;border-top:1px solid var(--line-2)}
+.set-row:first-child{border-top:0}
+.set-row .k{font-weight:600}
+.set-row .v{color:var(--muted);font-size:13.5px}
+
+/* ===== Modal ===== */
+.modal{position:fixed;inset:0;background:rgba(13,23,43,.5);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.modal.hidden{display:none}
+.sheet{background:var(--paper);border-radius:20px;width:100%;max-width:520px;max-height:92vh;overflow:auto;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.3)}
+.sheet.wide{max-width:720px}
+.sheet h2{font-family:var(--serif);font-size:28px;margin-bottom:16px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:13px}
+.field label{font-size:12.5px;font-weight:600;color:var(--muted);letter-spacing:.02em}
+.field input,.field select,.field textarea{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;outline:none;width:100%}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+.field textarea{min-height:72px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.sheet .foot{display:flex;justify-content:flex-end;gap:8px;margin-top:10px;align-items:center}
+.err{color:var(--danger);font-size:14px;min-height:20px;margin-bottom:4px}
+.status{font-size:14px;color:var(--muted);min-height:20px}
+.progress{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-top:6px}
+.progress i{display:block;height:100%;width:0;background:var(--gold);transition:width .2s}
+.pm{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.pm .h{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.pm .h b{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-2)}
+.pm .sel{display:flex;gap:6px;margin-bottom:6px}
+.pm select{flex:1;border:1px solid var(--line);border-radius:9px;padding:8px 10px;background:#fff;min-width:0}
+
+
+/* ===== Letture ===== */
+.lett{overflow:hidden}
+.lett-t{font-family:var(--serif);font-size:22px;font-weight:600;padding:18px 22px 6px}
+.lett-i{border-top:1px solid var(--line-2)}
+.lett-t+.lett-i{border-top:0}
+.lett-i summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:14px 22px}
+.lett-i summary::-webkit-details-marker{display:none}
+.lett-n{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-2);flex:0 0 auto}
+.lett-r{color:var(--muted);font-size:13.5px;flex:1;min-width:0}
+.lett-i .chev{color:var(--muted);transition:transform .2s}
+.lett-i[open] .chev{transform:rotate(90deg)}
+.lett-x{padding:0 22px 18px;font-family:var(--serif);font-size:18.5px;line-height:1.55;white-space:pre-wrap;color:#262a35}
+.lett-f{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;padding:12px 22px;border-top:1px solid var(--line-2);font-size:12.5px;color:var(--muted);background:#fbf9f5}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:11px 18px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:60;font-size:14px;max-width:90vw;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media (max-width:980px){.grid2{grid-template-columns:1fr}}
+@media (max-width:900px){
+  .side{display:none}
+  .main{margin-left:0;padding-bottom:76px}
+  .content{padding:22px 18px 40px}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--navy);color:#fff;padding:calc(14px + env(safe-area-inset-top)) 18px 14px;position:sticky;top:0;z-index:20}
+  .topbar .t .eyebrow{color:#d3b27a;font-size:9.5px}
+  .topbar .t b{display:block;font-family:var(--serif);font-size:21px;font-weight:600;line-height:1.1}
+  .topbar button{background:rgba(255,255,255,.1);border:0;color:#fff;border-radius:8px;padding:7px 10px;font-size:12.5px}
+  .bottomnav{display:flex;position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--line);z-index:20;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+  .bottomnav button{flex:1;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:var(--muted);padding:6px 2px;cursor:pointer}
+  .bottomnav button.on{color:var(--navy);font-weight:600}
+  .bottomnav button.on svg{color:var(--gold)}
+  .page-head h1{font-size:32px}
+  .hero{padding:24px 22px}
+  .hero h2{font-size:30px;padding-right:80px}
+  .prow{grid-template-columns:1fr;gap:6px;padding:14px 18px}
+  .prow .ac{justify-content:flex-start}
+  .prow audio{grid-column:1}
+  .login{grid-template-columns:1fr}
+  .login-side{padding:36px 26px 30px;min-height:auto}
+  .login-side h1{font-size:40px}
+  .login-side .lines{top:auto;bottom:10px}
+  .login-main{padding:30px 20px 40px}
+  .row2,.row3{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="app"><div style="font-family:Inter,system-ui,sans-serif;text-align:center;padding:80px 20px;color:#6a6f7d">Caricamento dell'app del coro…</div></div>
+<div id="modal" class="modal hidden"></div>
+<div id="toast" class="toast"></div>
+<script>
+window.__coroErr=function(m){var a=document.getElementById('app');if(a)a.innerHTML='<div style="font-family:system-ui,sans-serif;max-width:640px;margin:60px auto;padding:20px;background:#fff3f0;border:1px solid #f0c8bf;border-radius:12px;color:#7a2b1f"><b>Errore nell\'app<\/b><br><br>'+String(m).split('<').join('&lt;')+'<br><br><small>Copia questo messaggio e mandalo a chi gestisce l\'app.<\/small><\/div>';};
+setTimeout(function(){var a=document.getElementById('app');if(a&&a.textContent.indexOf('Caricamento dell')>=0&&a.textContent.length<80){var ios=/iPhone|iPad|iPod/.test(navigator.userAgent);a.innerHTML='<div style="font-family:system-ui,sans-serif;max-width:520px;margin:60px auto;padding:22px;background:#fff;border:1px solid #e6e0d4;border-radius:14px;color:#1a1e29;line-height:1.5"><b style="font-size:18px">L\'app non riesce a partire<\/b><br><br>'+(ios?'Controlla la connessione e ricarica la pagina.':'Controlla la connessione e ricarica la pagina.')+'<\/div>';}},12000);
+window.addEventListener('error',function(e){window.__coroErr((e.message||'errore')+' (riga '+(e.lineno||'?')+')');});
+</script>
+<script>
+
+(function(){
+/* ================= costanti ================= */
+const FOLDER_ID='1tnj9pYbtTSqgKefArjc4boH7D7UrjuZD';
+const ROLES={
+  direttore:{label:'Direttore',desc:'Programmi delle celebrazioni, repertorio, audio e impostazioni',icon:'M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'},
+  segreteria:{label:'Segreteria',desc:'Calendario di prove e celebrazioni, comunicazioni',icon:'M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z'},
+  corista:{label:'Coristi',desc:'Canti della domenica, spartiti, audio e calendario',icon:'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm14 10v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'}
+};
+const VOCI=['Tutti','Soprani','Contralti','Tenori','Bassi'];
+const TIPI=['Prova','Celebrazione','Concerto','Riunione','Altro'];
+const MOMENTI=[['ingresso','Ingresso'],['aspersione','Aspersione'],['kyrie','Atto penitenziale'],['gloria','Gloria'],['salmo','Salmo responsoriale'],['acclamazione','Acclamazione al Vangelo'],['spirito','Sequenza e canti allo Spirito'],['offertorio','Offertorio'],['sanctus','Santo'],['responsorio','Credo, Padre nostro e acclamazioni'],['agnus','Agnello di Dio'],['eucarestia','Comunione'],['finale','Canto finale'],['lavanda','Lavanda dei piedi'],['croce','Adorazione della Croce'],['altro','Da catalogare']];
+const MOM_L=Object.fromEntries(MOMENTI);
+const MESSA_DEF=['ingresso','kyrie','gloria','salmo','acclamazione','offertorio','sanctus','agnus','eucarestia','finale'];
+const TEMPI=[['ordinario','Tempo ordinario'],['avvento','Avvento'],['natale','Natale'],['quaresima','Quaresima'],['pasqua','Pasqua'],['pentecoste','Pentecoste'],['mariano','Mariano']];
+const TEM_L=Object.fromEntries(TEMPI);
+const MAX_BYTES=20*1024*1024;
+const IC={
+  home:'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9.5Z',
+  cal:'M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z',
+  book:'M4 19.5V5a2 2 0 0 1 2-2h14v16H6.5A2.5 2.5 0 0 0 4 21.5Zm0 0A2.5 2.5 0 0 1 6.5 17H20',
+  wave:'M2 12h2M6 8v8M10 5v14M14 9v6M18 7v10M22 12h-2',
+  gear:'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm7.4-3a7.4 7.4 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14.5 3h-4l-.4 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6a7.4 7.4 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2l.4 2.6h4l.4-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2Z',
+  clock:'M12 7v5l3 2M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20Z',
+  pin:'M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Zm0-9a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z',
+  doc:'M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Zm0 0v5h5M9 13h6M9 17h6',
+  play:'M7 4v16l13-8L7 4Z',
+  folder:'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z',
+  search:'m21 21-4.3-4.3M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z',
+  arrow:'M5 12h14M13 6l6 6-6 6',
+  chev:'m9 6 6 6-6 6',
+  plus:'M12 5v14M5 12h14',
+  sync:'M21 12a9 9 0 0 1-15.5 6.2M3 12A9 9 0 0 1 18.5 5.8M21 4v5h-5M3 20v-5h5',
+  x:'M18 6 6 18M6 6l12 12'
+};
+
+/* ================= stato ================= */
+const S={db:null,user:null,assets:null,mcp:null,role:null,tab:'domenica',config:null,appts:[],audios:[],links:[],canti:[],progs:[],
+  loaded:{config:false,appts:false,audios:false,links:false,canti:false,progs:false},catMeta:{},
+  slow:false,noDb:false,showPast:false,voce:'Tutte',canWrite:null,readOnly:false,cq:'',cm:'tutti',ct:'tutti',openGrp:null,
+  selProg:null,sync:{state:'idle',msg:''},syncTried:false,playing:null};
+try{const t=localStorage.getItem('coro_token'),r=localStorage.getItem('coro_role');if(t&&ROLES[r]){S.token=t;S.role=r;}}catch(e){}
+const $app=document.getElementById('app'),$modal=document.getElementById('modal'),$toast=document.getElementById('toast');
+
+/* ================= helper ================= */
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ic=(k,s=18,w=1.8)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"><path d="${IC[k]||k}"/></svg>`;
+const staff=cls=>`<svg class="${cls}" viewBox="0 0 600 60" preserveAspectRatio="none"><g stroke="#fff" stroke-width="1">${[6,18,30,42,54].map(y=>`<line x1="0" x2="600" y1="${y}" y2="${y}"/>`).join('')}</g></svg>`;
+function todayStr(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function nextSunday(){const d=new Date();d.setDate(d.getDate()+((7-d.getDay())%7));return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function pd(s){const [y,m,d]=(s||'').split('-').map(Number);return new Date(y,(m||1)-1,d||1);}
+const F=(o)=>new Intl.DateTimeFormat('it-IT',o);
+const fMonth=s=>F({month:'long',year:'numeric'}).format(pd(s));
+const fWd=s=>F({weekday:'short'}).format(pd(s)).replace('.','');
+const fLong=s=>{const t=F({weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(pd(s));return t.charAt(0).toUpperCase()+t.slice(1);};
+const fShort=s=>F({day:'numeric',month:'short'}).format(pd(s));
+const fDur=x=>{if(!x&&x!==0)return'';x=Math.round(x);return Math.floor(x/60)+':'+String(x%60).padStart(2,'0');};
+const fWhen=ms=>ms?F({day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}).format(new Date(ms)):'';
+const fDay=ms=>ms?F({day:'numeric',month:'short',year:'numeric'}).format(new Date(ms)):'';
+async function sha(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('coro::'+t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+function toast(m){$toast.textContent=m;$toast.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>$toast.classList.remove('on'),3200);}
+function errMsg(e){
+  const m=(e&&e.message)||String(e||'');
+  if(/AUTH/.test(m)){setTimeout(logout,50);return 'Accesso scaduto: entra di nuovo.';}
+  if(/PERM/.test(m))return 'Il tuo accesso non permette questa modifica.';
+  if(/PASSWORD/.test(m))return 'Password non corretta.';
+  if(/Lock|timeout|Timed out/i.test(m))return 'Server occupato, riprova tra un attimo.';
+  return m&&m.length<160?m:'Operazione non riuscita, riprova tra poco.';
+}
+const API_URL='https://script.google.com/macros/s/AKfycbx5R5AYpTYiBYd8bAuesL7A9vcOk9wnA5VMHMM6I-Pgsy9IiVRlVbf6AyvYl8uxN0tbBQ/exec';
+async function api(fn,...args){
+  let r;
+  try{r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({fn,args}),credentials:'omit',redirect:'follow',cache:'no-store'});}
+  catch(e){throw new Error('Connessione assente: controlla internet e riprova.');}
+  let j;try{j=await r.json();}catch(e){throw new Error('Il server del coro non risponde correttamente. Riprova tra poco.');}
+  if(!j||!j.ok)throw new Error((j&&j.error)||'Errore del server');
+  return j.data;
+}
+function apply(d){if(!d)return;S.config=d.config;S.pwSet=d.pwSet||{};S.canti=d.canti||[];S.appts=d.appuntamenti||[];S.progs=d.programmi||[];S.audios=d.audio||[];S.links=d.links||[];S.catMeta={syncAt:d.syncAt};Object.keys(S.loaded).forEach(k=>S.loaded[k]=true);S.lastLoad=Date.now();render();}
+const audioSrc=a=>a&&a.fileId?'https://drive.google.com/uc?export=download&id='+encodeURIComponent(a.fileId):'';
+const audioView=a=>a&&a.fileId?'https://drive.google.com/file/d/'+encodeURIComponent(a.fileId)+'/view':'#';
+const tl=t=>t?`<span class="tl ${esc(t)}"><i></i>${esc(TEM_L[t]||t)}</span>`:'';
+const safeUrl=u=>/^https:[/][/]/i.test(u||'')?u:'#';
+const cUrl=c=>c?(c.url||(c.d?'https://drive.google.com/file/d/'+c.d+'/view':'')):'';
+const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+const can={
+  appts:()=>S.role==='direttore'||S.role==='segreteria',
+  links:()=>S.role==='direttore'||S.role==='segreteria',
+  audio:()=>S.role==='direttore',
+  progs:()=>S.role==='direttore',
+  canti:()=>S.role==='direttore',
+  settings:()=>S.role==='direttore'
+};
+const cfg=k=>(S.config&&S.config[k])||(S.pub&&S.pub.config&&S.pub.config[k])||'';
+const nome=()=>cfg('nome')||'Il nostro Coro';
+const nomeHtml=()=>{const n=nome();const m=n.match(/^(.*?)\s*[“"](.+?)[”"]\s*$/);return m?`${esc(m[1])} <em>${esc(m[2])}</em>`:esc(n);};
+const cantoById=id=>S.canti.find(c=>c.id===id);
+const audiosFor=id=>S.audios.filter(a=>a.cantoId===id);
+
+/* ================= render ================= */
+function render(){
+  const keep={};document.querySelectorAll('#app audio[data-key]').forEach(a=>keep[a.dataset.key]=a);
+  const y=window.scrollY;
+  $app.innerHTML=S.role?viewShell():viewLogin();
+  document.querySelectorAll('#app audio[data-key]').forEach(a=>{const o=keep[a.dataset.key];if(o&&o.src===a.src)a.replaceWith(o);});
+  if(document.getElementById('canti-list'))renderCanti();
+  window.scrollTo(0,y);
+}
+
+function viewLogin(){
+  let note='';
+  if(S.netErr)note=`<div class="notice">Non riesco a raggiungere il server del coro: controlla la connessione e ricarica.</div>`;
+  return `<div class="login">
+    <div class="login-side">
+      <div><div class="eyebrow" style="color:#d3b27a">${esc(cfg('parrocchia')||'Area riservata')}</div>
+      <h1>${nomeHtml()}</h1><div class="dir">${esc(cfg('sottotitolo'))}</div></div>
+      ${staff('lines')}
+      <div class="foot">Canti, spartiti, audio e calendario del coro</div>
+    </div>
+    <div class="login-main">
+      <div class="eyebrow">Benvenuto</div><h2>Chi sei?</h2><p class="lead">Scegli il tuo accesso per entrare.</p>
+      <div class="roles">${Object.entries(ROLES).map(([k,r])=>`
+        <button class="role" data-act="pick" data-role="${k}"><div class="ic">${ic(r.icon,22)}</div>
+        <div class="tx"><h3>${r.label}</h3><p>${r.desc}</p></div><span class="ar">${ic('arrow',18)}</span></button>`).join('')}</div>
+      ${note}
+    </div></div>`;
+}
+
+function tabs(){
+  const t=[['domenica','Domenica','home'],['calendario','Calendario','cal'],['repertorio','Repertorio','book'],['audio','Audio','wave']];
+  if(can.settings())t.push(['impostazioni','Impostazioni','gear']);
+  return t;
+}
+function viewShell(){
+  const T=tabs();if(!T.find(t=>t[0]===S.tab))S.tab='domenica';
+  const r=ROLES[S.role];
+  let body='';
+  if(S.tab==='domenica')body=viewDomenica();
+  else if(S.tab==='calendario')body=viewCalendario();
+  else if(S.tab==='repertorio')body=viewRepertorio();
+  else if(S.tab==='audio')body=viewAudio();
+  else body=viewSettings();
+  const ro='';const slow=S.netErr&&S.loaded.canti?`<div class="warn">Connessione assente: i dati potrebbero non essere aggiornati.</div>`:'';
+  return `
+  <aside class="side">
+    <div class="brand"><div class="eyebrow">${esc(cfg('parrocchia'))}</div><div class="name">${nomeHtml()}</div><div class="dir">${esc(cfg('sottotitolo'))}</div></div>
+    <nav class="nav">${T.map(([k,l,i])=>`<button class="${S.tab===k?'on':''}" data-act="tab" data-tab="${k}">${ic(i,18)}${l}</button>`).join('')}</nav>
+    <div class="me"><div class="who">Accesso<b>${r.label}</b></div><button data-act="logout">Esci</button></div>
+  </aside>
+  <div class="main">
+    <div class="topbar"><div class="t"><div class="eyebrow">${esc(cfg('parrocchia'))}</div><b>${esc(nome())}</b></div><button data-act="logout">${r.label} · Esci</button></div>
+    <div class="content">${ro}${slow}${body}</div>
+    <nav class="bottomnav">${T.map(([k,l,i])=>`<button class="${S.tab===k?'on':''}" data-act="tab" data-tab="${k}">${ic(i,20)}${l}</button>`).join('')}</nav>
+  </div>`;
+}
+
+/* ---------- Domenica (dashboard) ---------- */
+function upcomingProgs(){const t=todayStr();return S.progs.filter(p=>p.data>=t).sort((a,b)=>a.data.localeCompare(b.data));}
+function pastProgs(){const t=todayStr();return S.progs.filter(p=>p.data<t).sort((a,b)=>b.data.localeCompare(a.data));}
+function viewDomenica(){
+  const up=upcomingProgs(),past=pastProgs();
+  let sel=S.selProg&&S.progs.find(p=>p.id===S.selProg);
+  if(!sel)sel=up[0]||past[0]||null;
+  const head=`<div class="page-head"><div><div class="eyebrow">Programma dei canti</div><h1>La domenica del coro</h1></div>
+    ${can.progs()?`<button class="btn gold" data-act="prog-new">${ic('plus',16,2.2)}Nuovo programma</button>`:''}</div>`;
+  if(!S.loaded.progs||!S.loaded.canti)return head+`<div class="loading">Caricamento…</div>`;
+  let main='';
+  if(!sel){
+    main=`<div class="empty"><b>Nessun programma ancora</b>${can.progs()?'Crea il programma della prossima domenica scegliendo i canti per ogni momento della Messa.':'Il direttore pubblicherà qui i canti della prossima celebrazione.'}</div>`;
+  }else{
+    const isPast=sel.data<todayStr();
+    const rows=(sel.scelte||[]).filter(x=>x&&x.c);
+    main=`<div class="hero">${staff('lines')}
+      ${can.progs()?`<div class="acts"><button data-act="prog-edit" data-id="${esc(sel.id)}">Modifica</button><button data-act="prog-dup" data-id="${esc(sel.id)}">Duplica</button><button data-act="prog-del" data-id="${esc(sel.id)}">Elimina</button></div>`:''}
+      <div class="eyebrow">${isPast?'Celebrazione passata':'Prossima celebrazione'} · ${esc(fLong(sel.data))}${sel.ora?' · ore '+esc(sel.ora):''}</div>
+      <h2>${esc(sel.titolo||'Santa Messa')}</h2>
+      <div class="meta">${tl(sel.tempo)}${sel.luogo?`<span>${ic('pin',14)} ${esc(sel.luogo)}</span>`:''}</div>
+      ${sel.note?`<div class="note">${esc(sel.note)}</div>`:''}
+    </div>
+    <div class="card prog" style="margin-top:14px">${rows.length?rows.map((x,i)=>progRow(x,i)).join(''):`<div class="pad muted">Nessun canto inserito.</div>`}</div>`;
+  }
+  // side column
+  main+=lettureCard(sel?sel.data:nextSunday());
+  const nextA=S.appts.filter(a=>a.data>=todayStr()).sort(cmpAppt).slice(0,3);
+  const lastAud=S.audios.slice(0,3);
+  const others=up.filter(p=>!sel||p.id!==sel.id);
+  const side=`
+    ${others.length||past.length?`<div class="card side-card"><h3>Altri programmi</h3><div class="plist">
+      ${others.map(p=>progItem(p,sel)).join('')}
+      ${past.length?`<div class="item" data-act="past-progs" style="color:var(--muted);font-size:13px">${S.showPastProgs?'Nascondi':'Mostra'} programmi passati (${past.length})</div>`:''}
+      ${S.showPastProgs?past.filter(p=>!sel||p.id!==sel.id).map(p=>progItem(p,sel)).join(''):''}
+    </div></div>`:''}
+    <div class="card side-card" style="margin-top:16px"><h3>Prossimi appuntamenti</h3>
+      ${nextA.length?nextA.map(a=>`<div class="mini"><div class="dt"><b>${pd(a.data).getDate()}</b><span>${esc(fWd(a.data))}</span></div><div class="tx"><b>${esc(a.titolo)}</b><div>${a.ora?'ore '+esc(a.ora):''}${a.luogo?(a.ora?' · ':'')+esc(a.luogo):''}</div></div></div>`).join(''):`<div class="mini muted" style="font-size:13.5px">Nessun appuntamento in programma.</div>`}
+      <div style="padding:6px 12px 12px"><button class="lnk" data-act="tab" data-tab="calendario">Vai al calendario →</button></div></div>
+    ${lastAud.length?`<div class="card side-card" style="margin-top:16px"><h3>Ultimi audio</h3>
+      ${lastAud.map(a=>`<div class="mini"><div class="dt" style="color:var(--gold-2)">${ic('play',18)}</div><div class="tx"><b>${esc(a.titolo)}</b><div>${esc(a.voce||'Tutti')}${a.durata?' · '+fDur(a.durata):''}</div></div></div>`).join('')}
+      <div style="padding:6px 12px 12px"><button class="lnk" data-act="tab" data-tab="audio">Tutti gli audio →</button></div></div>`:''}`;
+  return head+`<div class="grid2"><div>${main}</div><div>${side}</div></div>`;
+}
+function progItem(p,sel){return `<div class="item ${sel&&sel.id===p.id?'sel':''}" data-act="prog-sel" data-id="${esc(p.id)}"><div class="dt" style="flex:0 0 44px;text-align:center"><b class="serif" style="display:block;font-size:24px;line-height:1;color:var(--navy)">${pd(p.data).getDate()}</b><span style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)">${esc(F({month:'short'}).format(pd(p.data)).replace('.',''))}</span></div><div style="flex:1;min-width:0"><b style="font-weight:600">${esc(p.titolo||'Santa Messa')}</b><div style="font-size:12.5px;color:var(--muted)">${esc(TEM_L[p.tempo]||'')}</div></div></div>`;}
+function progRow(x,i){
+  const c=cantoById(x.c);const auds=c?audiosFor(c.id):[];const key='p'+i+'-'+x.c;
+  return `<div class="prow"><div class="mo">${esc(x.label||MOM_L[x.m]||x.m)}</div>
+    <div>${c?`<div class="ti">${esc(c.titolo)}</div>${c.autore?`<div class="au">${esc(c.autore)}</div>`:''}`:`<div class="ti muted">Canto non più in repertorio</div>`}</div>
+    <div class="ac">${c&&cUrl(c)?`<a class="pill-btn" href="${esc(safeUrl(cUrl(c)))}" target="_blank" rel="noopener">${ic('doc',15)}Spartito</a>`:''}
+      ${auds.length?`<button class="pill-btn" data-act="play" data-key="${esc(key)}">${ic('play',13)}Ascolta</button>`:''}</div>
+    ${auds.length&&S.playing===key?auds.map(a=>`<audio controls autoplay data-key="${esc(key+a.id)}" src="${esc(audioSrc(a))}" title="${esc(a.titolo)}"></audio>`).join(''):''}
+  </div>`;
+}
+
+
+/* ---------- letture della domenica ---------- */
+function vnUrl(date){return 'https:'+'/'+'/www.vaticannews.va/it/vangelo-del-giorno-e-parola-del-giorno/'+String(date).split('-').join('/')+'.html';}
+function lettureCard(date){
+  S.letture=S.letture||{};
+  const L=S.letture[date];
+  const head=`<div class="sec-h"><h2>Letture della Messa</h2><span class="muted" style="font-size:13px">${esc(fLong(date))}</span></div>`;
+  if(!L){
+    if(S.lettLoading!==date&&S.token){S.lettLoading=date;
+      api('getLetture',S.token,date).then(r=>{S.letture[date]=r;S.lettLoading=null;if(S.tab==='domenica')render();})
+        .catch(()=>{S.letture[date]={ok:false,fonte:vnUrl(date)};S.lettLoading=null;if(S.tab==='domenica')render();});}
+    return head+`<div class="card pad muted">Caricamento delle letture…</div>`;
+  }
+  const fonte=L.fonte||vnUrl(date);
+  if(!L.ok)return head+`<div class="card pad"><div class="muted" style="margin-bottom:10px">Le letture di questa data non sono ancora disponibili in automatico (di solito compaiono pochi giorni prima).</div><a class="pill-btn" href="${esc(fonte)}" target="_blank" rel="noopener">Leggile su Vatican News ↗</a></div>`;
+  return head+`<div class="card lett">
+    ${L.titolo?`<div class="lett-t">${esc(L.titolo)}</div>`:''}
+    ${L.letture.map((x,i)=>`<details class="lett-i" ${x.k==='GSP'?'open':''}><summary><span class="lett-n">${esc(x.nome)}</span><span class="lett-r">${esc(x.rif||'')}</span><span class="chev">${ic('chev',16)}</span></summary><div class="lett-x">${esc(x.testo)}</div></details>`).join('')}
+    <div class="lett-f"><span>Testi liturgici: Evangelizo.org</span><a class="lnk" href="${esc(fonte)}" target="_blank" rel="noopener">Apri su Vatican News ↗</a></div>
+  </div>`;
+}
+/* ---------- Calendario ---------- */
+function cmpAppt(a,b){return (a.data+(a.ora||'')).localeCompare(b.data+(b.ora||''));}
+function viewCalendario(){
+  const t=todayStr();const up=S.appts.filter(a=>a.data>=t).sort(cmpAppt);const past=S.appts.filter(a=>a.data<t).sort(cmpAppt).reverse();
+  const head=`<div class="page-head"><div><div class="eyebrow">Prove e celebrazioni</div><h1>Calendario</h1></div>${can.appts()?`<button class="btn gold" data-act="appt-new">${ic('plus',16,2.2)}Nuovo appuntamento</button>`:''}</div>`;
+  if(!S.loaded.appts)return head+`<div class="loading">Caricamento…</div>`;
+  let h=up.length?groupMonths(up):`<div class="empty"><b>Nessun appuntamento in programma</b>${can.appts()?'Aggiungi la prossima prova o celebrazione.':'Gli appuntamenti appariranno qui appena vengono inseriti.'}</div>`;
+  if(past.length){h+=`<div style="margin-top:22px"><button class="lnk" data-act="past">${S.showPast?'Nascondi':'Mostra'} appuntamenti passati (${past.length})</button></div>`;if(S.showPast)h+=`<div class="past" style="margin-top:10px">${groupMonths(past)}</div>`;}
+  return head+h;
+}
+function groupMonths(list){let o='',cur='';for(const a of list){const m=fMonth(a.data);if(m!==cur){if(cur)o+='</div>';o+=`<div class="month">${esc(m)}</div><div class="stack">`;cur=m;}o+=apptCard(a);}return o+(cur?'</div>':'');}
+function apptCard(a){
+  const ora=a.ora?(a.oraFine?`${a.ora} – ${a.oraFine}`:`ore ${a.ora}`):'';
+  return `<div class="card appt"><div class="dt"><b>${pd(a.data).getDate()}</b><span>${esc(fWd(a.data))}</span></div>
+    <div class="bd"><h3>${esc(a.titolo)}<span class="tag ${esc(a.tipo)}">${esc(a.tipo||'Prova')}</span></h3>
+    <div class="mt">${ora?`<span>${ic('clock',14)}${esc(ora)}</span>`:''}${a.luogo?`<span>${ic('pin',14)}${esc(a.luogo)}</span>`:''}</div>
+    ${a.note?`<div class="nt">${esc(a.note)}</div>`:''}</div>
+    ${can.appts()?`<div><button class="lnk" data-act="appt-edit" data-id="${esc(a.id)}">Modifica</button><button class="lnk" data-act="appt-del" data-id="${esc(a.id)}">Elimina</button></div>`:''}</div>`;
+}
+
+/* ---------- Repertorio ---------- */
+function syncBar(){
+  const last=S.catMeta.syncAt;const busy=S.sync.state==='busy';
+  const msg=busy?'Lettura della cartella Drive in corso…':S.sync.state==='err'?S.sync.msg:`Repertorio letto dalla cartella Drive · si aggiorna da solo${last?' · ultimo controllo '+fWhen(last):''}`;
+  return `<div class="syncbar"><span><span class="dot ${busy?'busy':S.sync.state==='err'?'err':''}"></span>${esc(msg)}</span>${can.canti()&&!busy?`<button class="btn ghost sm" data-act="sync">${ic('sync',14)}Aggiorna ora</button>`:''}</div>`;
+}
+function viewRepertorio(){
+  const head=`<div class="page-head"><div><div class="eyebrow">Spartiti su Google Drive</div><h1>Repertorio</h1><div class="sub">${S.canti.length} canti catalogati per momento e tempo liturgico</div></div>${can.canti()?`<button class="btn ghost" data-act="canto-new">${ic('plus',16,2.2)}Aggiungi canto</button>`:''}</div>`;
+  if(!S.loaded.canti)return head+`<div class="loading">Caricamento…</div>`;
+  return head+syncBar()+`<div class="filters"><div class="srch">${ic('search',16)}<input id="cq" type="search" placeholder="Cerca per titolo o autore…" value="${esc(S.cq)}"></div>
+    <select id="cm"><option value="tutti">Tutti i momenti</option>${MOMENTI.map(([k,l])=>`<option value="${k}" ${S.cm===k?'selected':''}>${l}</option>`).join('')}</select>
+    <select id="ct"><option value="tutti">Tutti i tempi</option>${TEMPI.map(([k,l])=>`<option value="${k}" ${S.ct===k?'selected':''}>${l}</option>`).join('')}</select></div>
+    <div id="canti-list"></div>${viewFolders()}`;
+}
+function renderCanti(){
+  const box=document.getElementById('canti-list');if(!box)return;
+  const q=norm(S.cq).trim();
+  const list=S.canti.filter(c=>(S.cm==='tutti'||c.momento===S.cm)&&(S.ct==='tutti'||c.tempo===S.ct)&&(!q||norm(c.titolo+' '+(c.autore||'')).includes(q)));
+  const filtered=!!q||S.cm!=='tutti'||S.ct!=='tutti';
+  if(!S.canti.length){box.innerHTML=`<div class="empty"><b>Il repertorio è vuoto</b>${can.canti()?'Apri l\'app come direttore per importare gli spartiti da Drive.':''}</div>`;return;}
+  if(!list.length){box.innerHTML=`<div class="empty">Nessun canto trovato.</div>`;return;}
+  const groups=MOMENTI.map(([k,l])=>[k,l,list.filter(c=>c.momento===k)]).filter(g=>g[2].length);
+  const extra=list.filter(c=>!MOM_L[c.momento]);if(extra.length)groups.push(['?','Altri canti',extra]);
+  const open=filtered||groups.length===1;
+  box.innerHTML=groups.map(([k,l,arr])=>`<details class="grp" ${open||S.openGrp===k?'open':''} data-grp="${k}"><summary><h3>${esc(l)}</h3><span class="n">${arr.length} canti <span class="chev">${ic('chev',16)}</span></span></summary>
+    ${arr.slice().sort((a,b)=>a.titolo.localeCompare(b.titolo,'it')).map(c=>`<div class="canto"><div class="bd"><div class="tt">${esc(c.titolo)}${c.tempo&&c.tempo!=='ordinario'?tl(c.tempo):''}</div>${c.autore?`<div class="au">${esc(c.autore)}</div>`:''}</div>
+      ${audiosFor(c.id).length?`<span class="muted" title="Audio disponibile">${ic('wave',16)}</span>`:''}
+      ${cUrl(c)?`<a class="pill-btn" href="${esc(safeUrl(cUrl(c)))}" target="_blank" rel="noopener">${ic('doc',14)}Spartito</a>`:''}
+      ${can.canti()?`<button class="lnk" data-act="canto-edit" data-id="${esc(c.id)}">Modifica</button>`:''}</div>`).join('')}</details>`).join('');
+}
+function viewFolders(){
+  return `<div class="sec-h"><h2>Cartelle su Drive</h2>${can.links()?`<button class="btn ghost sm" data-act="link-new">${ic('plus',14,2.2)}Aggiungi cartella</button>`:''}</div>
+  ${S.links.length?`<div class="stack">${S.links.map(l=>`<div class="card folder"><div class="ic">${ic('folder',20)}</div><div class="bd"><b>${esc(l.titolo)}</b><div>${esc(l.descrizione||l.url)}</div></div>
+    <a class="pill-btn" href="${esc(safeUrl(l.url))}" target="_blank" rel="noopener">Apri ↗</a>
+    ${can.links()?`<button class="lnk" data-act="link-edit" data-id="${esc(l.id)}">Modifica</button><button class="lnk" data-act="link-del" data-id="${esc(l.id)}">Elimina</button>`:''}</div>`).join('')}</div>`:`<div class="empty">Nessuna cartella collegata.</div>`}`;
+}
+
+/* ---------- Audio ---------- */
+function viewAudio(){
+  let head=`<div class="page-head"><div><div class="eyebrow">Registrazioni per lo studio</div><h1>Audio</h1></div>${can.audio()?`<button class="btn gold" data-act="audio-new">${ic('plus',16,2.2)}Carica audio</button>`:''}</div>`;
+  if(!S.loaded.audios)return head+`<div class="loading">Caricamento…</div>`;
+  if(!S.audios.length)return head+`<div class="empty"><b>Ancora nessun audio</b>${can.audio()?'Carica le registrazioni delle parti o delle prove.':'Qui troverai le registrazioni caricate dal direttore.'}</div>`;
+  const chips=`<div class="chips">${['Tutte',...VOCI].map(v=>`<button class="chip ${S.voce===v?'on':''}" data-act="voce" data-voce="${v}">${v==='Tutte'?'Tutte le voci':v}</button>`).join('')}</div>`;
+  const list=S.audios.filter(a=>S.voce==='Tutte'||a.voce===S.voce||a.voce==='Tutti');
+  return head+chips+(list.length?`<div class="stack">${list.map(a=>{const c=a.cantoId&&cantoById(a.cantoId);return `<div class="card aud"><div class="top"><div><h3>${esc(a.titolo)}</h3>
+    <div class="mt">${c?`<span>${esc(c.titolo)}</span>`:a.brano?`<span>${esc(a.brano)}</span>`:''}<span>${esc(a.voce||'Tutti')}</span>${a.durata?`<span>${fDur(a.durata)}</span>`:''}<span>${esc(fDay(a.createdAt))}</span></div></div>
+    ${can.audio()?`<div><button class="lnk" data-act="audio-edit" data-id="${esc(a.id)}">Modifica</button><button class="lnk" data-act="audio-del" data-id="${esc(a.id)}">Elimina</button></div>`:''}</div>
+    ${a.note?`<div class="nt">${esc(a.note)}</div>`:''}${a.fileId?`<audio controls preload="none" data-key="${esc(a.id)}" src="${esc(audioSrc(a))}"></audio><div style="margin-top:6px"><a class="lnk" href="${esc(audioView(a))}" target="_blank" rel="noopener">Non parte? Apri su Drive ↗</a></div>`:''}</div>`;}).join('')}</div>`:`<div class="empty">Nessun audio per questa voce.</div>`);
+}
+
+/* ---------- Impostazioni ---------- */
+function viewSettings(){
+  const pw=S.pwSet||{};
+  return `<div class="page-head"><div><div class="eyebrow">Solo direttore</div><h1>Impostazioni</h1></div></div>
+  <div class="card">
+    <div class="set-row"><div><div class="k">Parrocchia, coro e direttore</div><div class="v">${esc(cfg('parrocchia'))} · ${esc(nome())} · ${esc(cfg('sottotitolo'))}</div></div><button class="btn ghost sm" data-act="set-name">Modifica</button></div>
+    ${Object.entries(ROLES).map(([k,r])=>`<div class="set-row"><div><div class="k">Password ${r.label}</div><div class="v">${pw[k]?'Impostata':'Nessuna password: accesso libero'}</div></div><button class="btn ghost sm" data-act="set-pw" data-role="${k}">Cambia</button></div>`).join('')}
+  </div>
+  <p class="muted" style="font-size:13px;margin-top:14px">Le password separano le tre aree dell'app. Chi può modificare i dati dipende anche dall'accesso che dai a ciascuno quando condividi l'app su claude.ai.</p>`;
+}
+
+/* ================= modali ================= */
+let busy=false;
+function openModal(html,mount,wide){$modal.innerHTML=`<div class="sheet ${wide?'wide':''}">${html}</div>`;$modal.classList.remove('hidden');const f=$modal.querySelector('input:not([type=hidden]),select,textarea');if(f&&!wide)setTimeout(()=>f.focus(),30);mount&&mount($modal);}
+function closeModal(){if(busy)return;$modal.classList.add('hidden');$modal.innerHTML='';}
+$modal.addEventListener('click',e=>{if(e.target===$modal)closeModal();if(e.target.closest('[data-close]'))closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+const foot=(label='Salva',extra='')=>`<div class="err"></div><div class="foot">${extra}<button type="button" class="btn ghost" data-close>Annulla</button><button class="btn" id="sv">${label}</button></div>`;
+async function guard(m,fn){const b=m.querySelector('#sv');if(b)b.disabled=true;busy=true;try{await fn();busy=false;closeModal();}catch(e){busy=false;if(b)b.disabled=false;const er=m.querySelector('.err');if(er)er.textContent=errMsg(e);}}
+function confirmBox(title,text,label,fn){
+  openModal(`<h2>${esc(title)}</h2><p>${esc(text)}</p><div class="err"></div><div class="foot"><button class="btn ghost" data-close>Annulla</button><button class="btn danger" id="sv">${esc(label)}</button></div>`,m=>{m.querySelector('#sv').onclick=()=>guard(m,fn);});
+}
+
+/* ---------- login ---------- */
+function pickRole(role){
+  const open=S.pub&&S.pub.open&&S.pub.open[role];
+  if(open){doLogin(role,'');return;}
+  openModal(`<h2>Accesso ${ROLES[role].label}</h2><form id="f"><div class="field"><label>Password</label><input type="password" id="pw" autocomplete="current-password" required></div>${foot('Entra')}</form>`,m=>{
+    m.querySelector('#f').onsubmit=e=>{e.preventDefault();guard(m,()=>doLogin(role,m.querySelector('#pw').value));};
+  });
+}
+async function doLogin(role,pw){
+  const r=await api('login',role,pw);
+  S.token=r.token;S.role=role;S.tab='domenica';
+  try{localStorage.setItem('coro_token',r.token);localStorage.setItem('coro_role',role);}catch(e){}
+  render();await loadAll();window.scrollTo(0,0);
+}
+function logout(){S.role=null;S.token=null;try{localStorage.removeItem('coro_token');localStorage.removeItem('coro_role');}catch(e){}Object.keys(S.loaded).forEach(k=>S.loaded[k]=false);render();}
+async function loadAll(){
+  if(!S.token)return;
+  try{const d=await api('getAll',S.token);S.netErr=false;apply(d);}
+  catch(e){const m=(e&&e.message)||'';if(/AUTH/.test(m))logout();else{S.netErr=true;render();}}
+}
+
+/* ---------- programma ---------- */
+function cantoOptions(m,tempo,selected){
+  const byT=(a,b)=>a.titolo.localeCompare(b.titolo,'it');
+  const lab=c=>esc(c.titolo+(c.autore?' — '+c.autore:''));
+  const opt=c=>`<option value="${esc(c.id)}" ${c.id===selected?'selected':''}>${lab(c)}</option>`;
+  const same=S.canti.filter(c=>c.momento===m);
+  const g1=same.filter(c=>tempo&&tempo!=='ordinario'&&c.tempo===tempo).sort(byT);
+  const g2=same.filter(c=>!g1.includes(c)).sort(byT);
+  const g3=S.canti.filter(c=>c.momento!==m).sort(byT);
+  return `<option value="">— scegli un canto —</option>`+
+    (g1.length?`<optgroup label="${esc(MOM_L[m]||m)} · ${esc(TEM_L[tempo])}">${g1.map(opt).join('')}</optgroup>`:'')+
+    (g2.length?`<optgroup label="${esc(MOM_L[m]||m)}${g1.length?' · altri tempi':''}">${g2.map(opt).join('')}</optgroup>`:'')+
+    `<optgroup label="Altri canti del repertorio">${g3.map(opt).join('')}</optgroup>`;
+}
+function progForm(p,dup){
+  const isNew=!p||dup;
+  const base=p?JSON.parse(JSON.stringify(p)):{data:nextSunday(),titolo:'',tempo:'ordinario',ora:'',luogo:'',note:'',scelte:MESSA_DEF.map(m=>({m,c:''}))};
+  if(dup){base.data=nextSunday();delete base.id;}
+  // group scelte by momento preserving order
+  let order=[],picks={};
+  (base.scelte||[]).forEach(x=>{if(!picks[x.m]){picks[x.m]=[];order.push(x.m);}picks[x.m].push(x.c||'');});
+  const draw=m=>{
+    const tempo=m.querySelector('#tempo').value;
+    m.querySelector('#moms').innerHTML=order.map(k=>`<div class="pm" data-m="${k}"><div class="h"><b>${esc(MOM_L[k]||k)}</b><span><button type="button" class="lnk" data-addc="${k}">+ altro canto</button><button type="button" class="lnk" data-rmm="${k}">Rimuovi</button></span></div>
+      ${picks[k].map((c,i)=>`<div class="sel"><select data-k="${k}" data-i="${i}">${cantoOptions(k,tempo,c)}</select>${picks[k].length>1?`<button type="button" class="lnk" data-rmc="${k}" data-i="${i}">${ic('x',14)}</button>`:''}</div>`).join('')}</div>`).join('');
+    const avail=MOMENTI.filter(([k])=>!order.includes(k)&&k!=='altro');
+    m.querySelector('#addm').innerHTML=`<option value="">+ Aggiungi un momento…</option>`+avail.map(([k,l])=>`<option value="${k}">${l}</option>`).join('');
+  };
+  openModal(`<h2>${isNew?'Nuovo programma':'Modifica programma'}</h2><form id="f">
+    <div class="row3"><div class="field"><label>Data</label><input id="data" type="date" required value="${esc(base.data)}"></div>
+    <div class="field"><label>Ora</label><input id="ora" type="time" value="${esc(base.ora)}"></div>
+    <div class="field"><label>Tempo liturgico</label><select id="tempo">${TEMPI.map(([k,l])=>`<option value="${k}" ${base.tempo===k?'selected':''}>${l}</option>`).join('')}</select></div></div>
+    <div class="row2"><div class="field"><label>Celebrazione</label><input id="titolo" maxlength="140" value="${esc(base.titolo)}" placeholder="Es. I Domenica di Avvento"></div>
+    <div class="field"><label>Luogo (facoltativo)</label><input id="luogo" maxlength="120" value="${esc(base.luogo)}"></div></div>
+    <div class="field"><label>Canti per momento della Messa</label><div id="moms"></div><select id="addm" style="border:1px dashed var(--line);border-radius:10px;padding:9px 10px;background:#fff"></select></div>
+    <div class="field"><label>Note per il coro (facoltative)</label><textarea id="note" maxlength="1500">${esc(base.note)}</textarea></div>
+    ${foot('Salva programma')}</form>`,m=>{
+    draw(m);
+    m.querySelector('#tempo').onchange=()=>draw(m);
+    m.querySelector('#moms').addEventListener('change',e=>{const s=e.target.closest('select[data-k]');if(s)picks[s.dataset.k][+s.dataset.i]=s.value;});
+    m.querySelector('#moms').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+      if(b.dataset.addc){picks[b.dataset.addc].push('');draw(m);}
+      else if(b.dataset.rmm){const k=b.dataset.rmm;order=order.filter(x=>x!==k);delete picks[k];draw(m);}
+      else if(b.dataset.rmc){picks[b.dataset.rmc].splice(+b.dataset.i,1);draw(m);}});
+    m.querySelector('#addm').onchange=e=>{const k=e.target.value;if(!k)return;
+      const pos=MOMENTI.findIndex(x=>x[0]===k);let idx=order.findIndex(o=>MOMENTI.findIndex(x=>x[0]===o)>pos);if(idx<0)idx=order.length;
+      order.splice(idx,0,k);picks[k]=[''];draw(m);};
+    m.querySelector('#f').onsubmit=e=>{e.preventDefault();const g=id=>m.querySelector('#'+id).value.trim();
+      const scelte=[];order.forEach(k=>picks[k].forEach(c=>{if(c)scelte.push({m:k,c});}));
+      const d={data:g('data'),ora:g('ora'),tempo:g('tempo'),titolo:g('titolo'),luogo:g('luogo'),note:g('note'),scelte,updatedAt:Date.now()};
+      guard(m,async()=>{const r=await api('saveProg',S.token,isNew?null:p.id,d);S.selProg=r.savedId;apply(r);toast('Programma salvato');});};
+  },true);
+}
+
+/* ---------- appuntamenti ---------- */
+function apptForm(a){
+  a=a||{tipo:'Prova',data:todayStr()};
+  openModal(`<h2>${a.id?'Modifica appuntamento':'Nuovo appuntamento'}</h2><form id="f">
+    <div class="field"><label>Titolo</label><input id="titolo" required maxlength="120" value="${esc(a.titolo)}" placeholder="Es. Prova generale"></div>
+    <div class="row2"><div class="field"><label>Tipo</label><select id="tipo">${TIPI.map(t=>`<option ${a.tipo===t?'selected':''}>${t}</option>`).join('')}</select></div>
+    <div class="field"><label>Data</label><input id="data" type="date" required value="${esc(a.data)}"></div></div>
+    <div class="row2"><div class="field"><label>Ora inizio</label><input id="ora" type="time" value="${esc(a.ora)}"></div><div class="field"><label>Ora fine</label><input id="oraFine" type="time" value="${esc(a.oraFine)}"></div></div>
+    <div class="field"><label>Luogo</label><input id="luogo" maxlength="160" value="${esc(a.luogo)}"></div>
+    <div class="field"><label>Note per i coristi</label><textarea id="note" maxlength="2000">${esc(a.note)}</textarea></div>${foot()}</form>`,m=>{
+    m.querySelector('#f').onsubmit=e=>{e.preventDefault();const g=id=>m.querySelector('#'+id).value.trim();
+      const d={titolo:g('titolo'),tipo:g('tipo'),data:g('data'),ora:g('ora'),oraFine:g('oraFine'),luogo:g('luogo'),note:g('note'),updatedAt:Date.now()};
+      guard(m,async()=>{apply(await api('saveAppt',S.token,a.id||null,d));toast('Appuntamento salvato');});};
+  });
+}
+
+/* ---------- cartelle ---------- */
+function linkForm(l){
+  l=l||{};
+  openModal(`<h2>${l.id?'Modifica cartella':'Nuova cartella Drive'}</h2><form id="f">
+    <div class="field"><label>Titolo</label><input id="titolo" required maxlength="120" value="${esc(l.titolo)}"></div>
+    <div class="field"><label>Link Google Drive</label><input id="url" type="url" required value="${esc(l.url)}" placeholder="https://drive.google.com/…"></div>
+    <div class="field"><label>Descrizione (facoltativa)</label><input id="descrizione" maxlength="200" value="${esc(l.descrizione)}"></div>
+    <div class="field"><label>Posizione</label><input id="ordine" type="number" value="${esc(l.ordine??(S.links.length+1))}"></div>${foot()}</form>`,m=>{
+    m.querySelector('#f').onsubmit=e=>{e.preventDefault();const g=id=>m.querySelector('#'+id).value.trim();const url=g('url');
+      if(!/^https:[/][/]/i.test(url)){m.querySelector('.err').textContent='Il link deve iniziare con https://';return;}
+      const d={titolo:g('titolo'),url,descrizione:g('descrizione'),ordine:Number(g('ordine'))||0,updatedAt:Date.now()};
+      guard(m,async()=>{apply(await api('saveLink',S.token,l.id||null,d));toast('Cartella salvata');});};
+  });
+}
+
+/* ---------- canti (catalogo) ---------- */
+function cantoForm(c){
+  const isNew=!c;c=c||{momento:'ingresso',tempo:'ordinario'};
+  openModal(`<h2>${isNew?'Nuovo canto':'Modifica canto'}</h2><form id="f">
+    <div class="field"><label>Titolo</label><input id="titolo" required maxlength="160" value="${esc(c.titolo)}"></div>
+    <div class="field"><label>Autore / raccolta</label><input id="autore" maxlength="160" value="${esc(c.autore)}"></div>
+    <div class="row2"><div class="field"><label>Momento liturgico</label><select id="momento">${MOMENTI.map(([k,l])=>`<option value="${k}" ${c.momento===k?'selected':''}>${l}</option>`).join('')}</select></div>
+    <div class="field"><label>Tempo liturgico</label><select id="tempo">${TEMPI.map(([k,l])=>`<option value="${k}" ${c.tempo===k?'selected':''}>${l}</option>`).join('')}</select></div></div>
+    ${c.d?`<p class="muted" style="font-size:13px;margin:0 0 10px">Spartito collegato al file su Drive. Le modifiche a titolo, momento e tempo restano anche se il file su Drive non viene rinominato.</p>`:`<div class="field"><label>Link allo spartito</label><input id="url" type="url" value="${esc(c.url)}" placeholder="https://drive.google.com/…"></div>`}
+    ${foot('Salva',isNew?'':'<button type="button" class="btn ghost" id="del" style="margin-right:auto;color:var(--danger)">Elimina</button>')}</form>`,m=>{
+    const d=m.querySelector('#del');if(d)d.onclick=()=>{if(d.dataset.sure)guard(m,async()=>{apply(await api('delCanto',S.token,{id:c.id,d:c.d||''}));toast('Canto tolto dal repertorio');});else{d.dataset.sure=1;d.textContent='Conferma eliminazione';}};
+    m.querySelector('#f').onsubmit=e=>{e.preventDefault();const g=id=>{const el=m.querySelector('#'+id);return el?el.value.trim():'';};
+      const url=g('url');if(url&&!/^https:[/][/]/i.test(url)){m.querySelector('.err').textContent='Il link deve iniziare con https://';return;}
+      const item={id:c.id||'',titolo:g('titolo'),autore:g('autore'),momento:g('momento'),tempo:g('tempo')};
+      if(c.d)item.d=c.d;else if(url)item.url=url;
+      guard(m,async()=>{apply(await api('saveCanto',S.token,item));toast('Repertorio aggiornato');});};
+  });
+}
+
+/* ---------- aggiornamento repertorio ---------- */
+async function syncDrive(){
+  if(!can.canti()||S.sync.state==='busy')return;
+  S.sync={state:'busy'};refreshSync();
+  try{const before=S.canti.length;const d=await api('syncNow',S.token);apply(d);const diff=S.canti.length-before;
+    S.sync={state:'done'};toast(diff>0?`${diff} ${diff===1?'nuovo canto':'nuovi canti'} dal Drive`:diff<0?'Repertorio aggiornato':'Nessuno spartito nuovo');}
+  catch(e){S.sync={state:'err',msg:errMsg(e)};}
+  refreshSync();
+}
+function refreshSync(){if(S.tab==='repertorio'){const b=document.querySelector('.syncbar');if(b)b.outerHTML=syncBar();}}
+
+/* ---------- audio ---------- */
+const MAX_UP=25*1024*1024;
+function readB64(file){return new Promise((ok,ko)=>{const r=new FileReader();r.onload=()=>ok(String(r.result).split(',')[1]);r.onerror=()=>ko(new Error('Impossibile leggere il file.'));r.readAsDataURL(file);});}
+function probeDuration(file){return new Promise(ok=>{const a=document.createElement('audio');const u=URL.createObjectURL(file);a.preload='metadata';
+  a.onloadedmetadata=()=>{const d=isFinite(a.duration)?a.duration:null;URL.revokeObjectURL(u);ok(d);};a.onerror=()=>{URL.revokeObjectURL(u);ok(null);};a.src=u;setTimeout(()=>ok(null),5000);});}
+function audioForm(a){
+  const isNew=!a;a=a||{voce:'Tutti'};
+  const opts=S.canti.slice().sort((x,y)=>x.titolo.localeCompare(y.titolo,'it')).map(c=>`<option value="${esc(c.id)}" ${a.cantoId===c.id?'selected':''}>${esc(c.titolo+(c.autore?' — '+c.autore:''))}</option>`).join('');
+  openModal(`<h2>${isNew?'Carica audio':'Modifica audio'}</h2><form id="f">
+    ${isNew?`<div class="field"><label>File audio</label><input id="file" type="file" accept="audio/*,.mp3,.m4a,.wav,.ogg,.aac" required></div>`:''}
+    <div class="field"><label>Titolo</label><input id="titolo" required maxlength="120" value="${esc(a.titolo)}" placeholder="Es. Parte dei tenori"></div>
+    <div class="field"><label>Canto del repertorio (facoltativo)</label><select id="cantoId"><option value="">— nessuno —</option>${opts}</select></div>
+    <div class="field"><label>Voce</label><select id="voce">${VOCI.map(v=>`<option ${a.voce===v?'selected':''}>${v}</option>`).join('')}</select></div>
+    <div class="field"><label>Note (facoltative)</label><textarea id="note" maxlength="1000">${esc(a.note)}</textarea></div>
+    ${isNew?`<div class="status" id="st">MP3 consigliato · massimo 25 MB per file. Il file viene salvato nel Drive del coro.</div><div class="progress"><i id="pg"></i></div>`:''}
+    ${foot(isNew?'Carica':'Salva')}</form>`,m=>{
+    const fi=m.querySelector('#file'),ti=m.querySelector('#titolo');
+    if(fi)fi.onchange=()=>{if(fi.files[0]&&!ti.value)ti.value=fi.files[0].name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ');};
+    m.querySelector('#f').onsubmit=e=>{e.preventDefault();const g=id=>m.querySelector('#'+id).value.trim();
+      const meta={titolo:g('titolo'),cantoId:g('cantoId'),voce:g('voce'),note:g('note')};
+      const c=meta.cantoId&&cantoById(meta.cantoId);meta.brano=c?c.titolo:(a.brano||'');
+      guard(m,async()=>{
+        if(!isNew){apply(await api('saveAudio',S.token,a.id,meta));toast('Audio aggiornato');return;}
+        const file=fi.files[0];if(!file)throw new Error('Scegli un file.');
+        if(file.size>MAX_UP)throw new Error('Il file supera 25 MB: esportalo in MP3 o dividilo in parti.');
+        const st=(t,p)=>{m.querySelector('#st').textContent=t;if(p!=null)m.querySelector('#pg').style.width=p+'%';};
+        st('Lettura del file…',10);meta.durata=await probeDuration(file);
+        const b64=await readB64(file);st('Caricamento sul Drive del coro… (può richiedere qualche secondo)',45);
+        apply(await api('uploadAudio',S.token,meta,b64,file.type||'audio/mpeg',file.name));
+        toast('Audio caricato');});};
+  });
+}
+
+/* ---------- impostazioni ---------- */
+function nameForm(){
+  openModal(`<h2>Parrocchia e coro</h2><form id="f">
+    <div class="field"><label>Parrocchia</label><input id="parrocchia" maxlength="120" value="${esc(cfg('parrocchia'))}"></div>
+    <div class="field"><label>Nome del coro</label><input id="nome" required maxlength="80" value="${esc(nome())}"></div>
+    <div class="field"><label>Direttore</label><input id="sottotitolo" maxlength="140" value="${esc(cfg('sottotitolo'))}"></div>${foot()}</form>`,m=>{
+    m.querySelector('#f').onsubmit=e=>{e.preventDefault();const g=id=>m.querySelector('#'+id).value.trim();
+      guard(m,async()=>{apply(await api('saveConfig',S.token,{parrocchia:g('parrocchia'),nome:g('nome'),sottotitolo:g('sottotitolo')}));toast('Salvato');});};
+  });
+}
+function pwForm(role){
+  openModal(`<h2>Password ${ROLES[role].label}</h2><form id="f">
+    <div class="field"><label>Nuova password</label><input id="p1" type="password" autocomplete="new-password"></div>
+    <div class="field"><label>Ripeti la password</label><input id="p2" type="password" autocomplete="new-password"></div>
+    <p class="muted" style="font-size:13px;margin:0 0 8px">Lascia vuoto per togliere la password e rendere l'accesso libero.</p>${foot()}</form>`,m=>{
+    m.querySelector('#f').onsubmit=e=>{e.preventDefault();const p1=m.querySelector('#p1').value,p2=m.querySelector('#p2').value,er=m.querySelector('.err');
+      if(p1!==p2){er.textContent='Le due password non coincidono.';return;}if(p1&&p1.length<4){er.textContent='Usa almeno 4 caratteri.';return;}
+      guard(m,async()=>{const r=await api('setPassword',S.token,role,p1);S.token=r.token;try{localStorage.setItem('coro_token',r.token);}catch(e){}await loadAll();S.pub=await api('publicInfo');toast('Password aggiornata: gli altri dovranno rientrare');});};
+  });
+}
+
+/* ================= eventi ================= */
+$app.addEventListener('input',e=>{const t=e.target;
+  if(t.id==='cq'){S.cq=t.value;renderCanti();}else if(t.id==='cm'){S.cm=t.value;renderCanti();}else if(t.id==='ct'){S.ct=t.value;renderCanti();}});
+$app.addEventListener('toggle',e=>{const d=e.target;if(d.dataset&&d.dataset.grp&&d.open)S.openGrp=d.dataset.grp;},true);
+$app.addEventListener('click',e=>{
+  const el=e.target.closest('[data-act]');if(!el)return;
+  const act=el.dataset.act,id=el.dataset.id;const find=arr=>arr.find(x=>x.id===id);
+  switch(act){
+    case 'pick':pickRole(el.dataset.role);break;
+    case 'logout':logout();break;
+    case 'tab':S.tab=el.dataset.tab;render();window.scrollTo(0,0);break;
+    case 'past':S.showPast=!S.showPast;render();break;
+    case 'past-progs':S.showPastProgs=!S.showPastProgs;render();break;
+    case 'voce':S.voce=el.dataset.voce;render();break;
+    case 'play':S.playing=S.playing===el.dataset.key?null:el.dataset.key;render();break;
+    case 'prog-sel':S.selProg=id;S.playing=null;render();window.scrollTo(0,0);break;
+    case 'prog-new':progForm();break;
+    case 'prog-edit':progForm(find(S.progs));break;
+    case 'prog-dup':progForm(find(S.progs),true);break;
+    case 'prog-del':{const p=find(S.progs);confirmBox('Eliminare il programma?',`Il programma del ${fLong(p.data)} verrà eliminato.`,'Elimina',async()=>{apply(await api('delProg',S.token,id));S.selProg=null;});break;}
+    case 'appt-new':apptForm();break;
+    case 'appt-edit':apptForm(find(S.appts));break;
+    case 'appt-del':{const a=find(S.appts);confirmBox('Eliminare l\'appuntamento?',`"${a.titolo}" del ${fLong(a.data)} verrà eliminato.`,'Elimina',async()=>apply(await api('delAppt',S.token,id)));break;}
+    case 'link-new':linkForm();break;
+    case 'link-edit':linkForm(find(S.links));break;
+    case 'link-del':{const l=find(S.links);confirmBox('Togliere la cartella?',`"${l.titolo}" verrà tolta dall'app (su Drive resta).`,'Togli',async()=>apply(await api('delLink',S.token,id)));break;}
+    case 'canto-new':cantoForm();break;
+    case 'canto-edit':cantoForm(cantoById(id));break;
+    case 'sync':syncDrive();break;
+    case 'audio-new':audioForm();break;
+    case 'audio-edit':audioForm(find(S.audios));break;
+    case 'audio-del':{const a=find(S.audios);confirmBox('Eliminare l\'audio?',`"${a.titolo}" verrà eliminato definitivamente.`,'Elimina',async()=>apply(await api('delAudio',S.token,id)));break;}
+    case 'set-name':nameForm();break;
+    case 'set-pw':pwForm(el.dataset.role);break;
+  }
+});
+
+/* ================= dati ================= */
+render();
+api('publicInfo').then(p=>{S.pub=p;if(!S.role)render();}).catch(()=>{S.netErr=true;render();});
+if(S.token)loadAll();
+setInterval(()=>{if(S.token&&document.visibilityState==='visible'&&!busy&&$modal.classList.contains('hidden'))loadAll();},120000);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&S.token&&Date.now()-(S.lastLoad||0)>30000)loadAll();});
+})();
+
+</script>
+</body>
+</html>

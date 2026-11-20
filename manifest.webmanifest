@@ -1,0 +1,14 @@
+{
+  "name": "Coro Voci in cammino",
+  "short_name": "Voci in cammino",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f3ed",
+  "theme_color": "#13203a",
+  "lang": "it",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
