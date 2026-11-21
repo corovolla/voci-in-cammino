@@ -114,7 +114,7 @@ svg{flex:0 0 auto}
 .hero h2{font-family:var(--serif);font-size:38px;line-height:1.08;margin:8px 0 10px;font-weight:600}
 .hero .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;color:#c8cdd9;font-size:14px;position:relative}
 .hero .tl{background:rgba(255,255,255,.1);color:#f1e3c6}
-.hero .acts{position:absolute;top:22px;right:22px;display:flex;gap:6px}
+.hero .acts{position:relative;display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap;margin:-8px -10px 14px 0}
 .hero .acts button{background:rgba(255,255,255,.1);border:0;color:#fff;border-radius:8px;padding:7px 11px;cursor:pointer;font-size:13px}
 .hero .acts button:hover{background:rgba(255,255,255,.18)}
 .hero .note{margin-top:14px;color:#dfe2ea;font-size:14px;white-space:pre-wrap;position:relative}
@@ -245,6 +245,30 @@ details.grp[open] summary{border-bottom:1px solid var(--line-2)}
 .lett-i[open] .chev{transform:rotate(90deg)}
 .lett-x{padding:0 22px 18px;font-family:var(--serif);font-size:18.5px;line-height:1.55;white-space:pre-wrap;color:#262a35}
 .lett-f{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;padding:12px 22px;border-top:1px solid var(--line-2);font-size:12.5px;color:var(--muted);background:#fbf9f5}
+
+/* ===== Selettore canti ===== */
+.pk{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px dashed var(--line-2)}
+.pk:first-child{border-top:0}
+.pk-l{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.pk .pq{border:1px solid var(--line);border-radius:9px;padding:8px 10px 8px 32px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236a6f7d' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m21 21-4.3-4.3M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z'/%3E%3C/svg%3E") no-repeat 10px center;font-size:14px;width:100%}
+.pk .pq:focus,.pk select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+.pk select{border:1px solid var(--line);border-radius:9px;padding:8px 10px;background:#fff;width:100%;min-width:0}
+.pk-th{flex:0 0 64px}
+.th{display:block;width:64px;height:84px;border-radius:6px;border:1px solid var(--line);background:#faf8f3;overflow:hidden;position:relative;text-decoration:none;color:var(--muted)}
+.th img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;position:relative;z-index:1}
+.th span{position:absolute;inset:0;display:grid;place-items:center}
+.th.empty{display:grid;place-items:center;font-size:10px;text-align:center;color:#b3ac9f;border-style:dashed}
+.th:hover{border-color:var(--gold)}
+/* ===== Novità e notifiche ===== */
+.news{background:var(--paper);border:1px solid #eadcc1;border-left:4px solid var(--gold);border-radius:14px;padding:12px 16px;margin-bottom:18px;box-shadow:var(--sh)}
+.news-h{display:flex;align-items:center;gap:10px;color:var(--gold-2)}
+.news-h b{flex:1;color:var(--ink)}
+.news-i{display:block;width:100%;text-align:left;background:none;border:0;padding:7px 0 0 28px;color:var(--navy);font-size:14px;cursor:pointer}
+.news-i:hover{color:var(--gold-2)}
+.notif{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--navy);color:#e9e5dc;border-radius:14px;padding:12px 16px;margin-bottom:18px;font-size:14px}
+.notif span{flex:1;min-width:200px}
+.notif .lnk{color:#c9cdd8}
+.notif .lnk:hover{background:rgba(255,255,255,.1);color:#fff}
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:11px 18px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:60;font-size:14px;max-width:90vw;box-shadow:0 10px 30px rgba(0,0,0,.2)}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 
@@ -263,7 +287,9 @@ details.grp[open] summary{border-bottom:1px solid var(--line-2)}
   .bottomnav button.on svg{color:var(--gold)}
   .page-head h1{font-size:32px}
   .hero{padding:24px 22px}
-  .hero h2{font-size:30px;padding-right:80px}
+  .hero h2{font-size:30px}
+  .hero .acts{margin:-4px 0 12px 0;justify-content:flex-start}
+  .bottomnav button{font-size:9.5px;padding:6px 0}
   .prow{grid-template-columns:1fr;gap:6px;padding:14px 18px}
   .prow .ac{justify-content:flex-start}
   .prow audio{grid-column:1}
@@ -286,6 +312,7 @@ setTimeout(function(){var a=document.getElementById('app');if(a&&a.textContent.i
 window.addEventListener('error',function(e){window.__coroErr((e.message||'errore')+' (riga '+(e.lineno||'?')+')');});
 </script>
 <script>
+
 
 (function(){
 /* ================= costanti ================= */
@@ -324,7 +351,7 @@ const IC={
 
 /* ================= stato ================= */
 const S={db:null,user:null,assets:null,mcp:null,role:null,tab:'domenica',config:null,appts:[],audios:[],links:[],canti:[],progs:[],
-  loaded:{config:false,appts:false,audios:false,links:false,canti:false,progs:false},catMeta:{},
+  loaded:{config:false,appts:false,audios:false,links:false,canti:false,progs:false,prove:false},catMeta:{},prove:[],news:[],
   slow:false,noDb:false,showPast:false,voce:'Tutte',canWrite:null,readOnly:false,cq:'',cm:'tutti',ct:'tutti',openGrp:null,
   selProg:null,sync:{state:'idle',msg:''},syncTried:false,playing:null};
 try{const t=localStorage.getItem('coro_token'),r=localStorage.getItem('coro_role');if(t&&ROLES[r]){S.token=t;S.role=r;}}catch(e){}
@@ -364,7 +391,7 @@ async function api(fn,...args){
   if(!j||!j.ok)throw new Error((j&&j.error)||'Errore del server');
   return j.data;
 }
-function apply(d){if(!d)return;S.config=d.config;S.pwSet=d.pwSet||{};S.canti=d.canti||[];S.appts=d.appuntamenti||[];S.progs=d.programmi||[];S.audios=d.audio||[];S.links=d.links||[];S.catMeta={syncAt:d.syncAt};Object.keys(S.loaded).forEach(k=>S.loaded[k]=true);S.lastLoad=Date.now();render();}
+function apply(d){if(!d)return;S.config=d.config;S.pwSet=d.pwSet||{};S.canti=d.canti||[];S.appts=d.appuntamenti||[];S.progs=d.programmi||[];S.audios=d.audio||[];S.links=d.links||[];S.prove=d.prove||[];S.notif=d.notif||{};S.catMeta={syncAt:d.syncAt};computeNews();Object.keys(S.loaded).forEach(k=>S.loaded[k]=true);S.lastLoad=Date.now();render();}
 const audioSrc=a=>a&&a.fileId?'https://drive.google.com/uc?export=download&id='+encodeURIComponent(a.fileId):'';
 const audioView=a=>a&&a.fileId?'https://drive.google.com/file/d/'+encodeURIComponent(a.fileId)+'/view':'#';
 const tl=t=>t?`<span class="tl ${esc(t)}"><i></i>${esc(TEM_L[t]||t)}</span>`:'';
@@ -384,6 +411,22 @@ const nome=()=>cfg('nome')||'Il nostro Coro';
 const nomeHtml=()=>{const n=nome();const m=n.match(/^(.*?)\s*[“"](.+?)[”"]\s*$/);return m?`${esc(m[1])} <em>${esc(m[2])}</em>`:esc(n);};
 const cantoById=id=>S.canti.find(c=>c.id===id);
 const audiosFor=id=>S.audios.filter(a=>a.cantoId===id);
+const thumbUrl=c=>c&&c.d?'https://drive.google.com/thumbnail?id='+encodeURIComponent(c.d)+'&sz=w320':'';
+const can2={prove:()=>S.role==='direttore'};
+function computeNews(){
+  let last=0;try{last=+localStorage.getItem('coro_seen_'+S.role)||0;}catch(e){}
+  if(!last){try{localStorage.setItem('coro_seen_'+S.role,String(Date.now()));}catch(e){}S.news=[];return;}
+  const t=todayStr();const n=[];
+  S.progs.forEach(p=>{if((p.createdAt||0)>last&&p.data>=t)n.push({ts:p.createdAt,txt:`Nuovo programma dei canti: ${p.titolo||'Santa Messa'} · ${fShort(p.data)}`,tab:'domenica',id:p.id});});
+  S.prove.forEach(p=>{if((p.createdAt||0)>last&&p.data>=t)n.push({ts:p.createdAt,txt:`Nuova prova: ${fShort(p.data)}${p.ora?' ore '+p.ora:''} · ${(p.canti||[]).length} canti da preparare`,tab:'prove'});});
+  S.appts.forEach(a=>{if((a.createdAt||0)>last&&a.data>=t)n.push({ts:a.createdAt,txt:`Nuovo appuntamento: ${a.titolo} · ${fShort(a.data)}${a.ora?' ore '+a.ora:''}`,tab:'calendario'});});
+  S.news=n.sort((a,b)=>b.ts-a.ts);
+}
+function newsBar(){
+  if(!S.news||!S.news.length)return '';
+  return `<div class="news"><div class="news-h">${ic('M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0',18)}<b>Novità dall'ultima visita</b><button class="lnk" data-act="news-ok">Ho visto</button></div>
+    ${S.news.map(x=>`<button class="news-i" data-act="tab" data-tab="${x.tab}">${esc(x.txt)} →</button>`).join('')}</div>`;
+}
 
 /* ================= render ================= */
 function render(){
@@ -415,7 +458,7 @@ function viewLogin(){
 }
 
 function tabs(){
-  const t=[['domenica','Domenica','home'],['calendario','Calendario','cal'],['repertorio','Repertorio','book'],['audio','Audio','wave']];
+  const t=[['domenica','Domenica','home'],['prove','Prove','M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'],['calendario','Calendario','cal'],['repertorio','Repertorio','book'],['audio','Audio','wave']];
   if(can.settings())t.push(['impostazioni','Impostazioni','gear']);
   return t;
 }
@@ -424,6 +467,7 @@ function viewShell(){
   const r=ROLES[S.role];
   let body='';
   if(S.tab==='domenica')body=viewDomenica();
+  else if(S.tab==='prove')body=viewProve();
   else if(S.tab==='calendario')body=viewCalendario();
   else if(S.tab==='repertorio')body=viewRepertorio();
   else if(S.tab==='audio')body=viewAudio();
@@ -437,8 +481,8 @@ function viewShell(){
   </aside>
   <div class="main">
     <div class="topbar"><div class="t"><div class="eyebrow">${esc(cfg('parrocchia'))}</div><b>${esc(nome())}</b></div><button data-act="logout">${r.label} · Esci</button></div>
-    <div class="content">${ro}${slow}${body}</div>
-    <nav class="bottomnav">${T.map(([k,l,i])=>`<button class="${S.tab===k?'on':''}" data-act="tab" data-tab="${k}">${ic(i,20)}${l}</button>`).join('')}</nav>
+    <div class="content">${ro}${slow}${notifBar()}${newsBar()}${body}</div>
+    <nav class="bottomnav">${T.map(([k,l,i])=>`<button class="${S.tab===k?'on':''}" data-act="tab" data-tab="${k}">${ic(i,20)}${l==='Impostazioni'?'Impost.':l}</button>`).join('')}</nav>
   </div>`;
 }
 
@@ -469,10 +513,12 @@ function viewDomenica(){
   }
   // side column
   main+=lettureCard(sel?sel.data:nextSunday());
+  const nP=S.prove.filter(p=>p.data>=todayStr()).sort((a,b)=>(a.data+(a.ora||'')).localeCompare(b.data+(b.ora||'')))[0];
+  const provaMini=nP?`<div class="card side-card" style="margin-bottom:16px"><h3>Prossima prova</h3><div class="mini"><div class="dt"><b>${pd(nP.data).getDate()}</b><span>${esc(fWd(nP.data))}</span></div><div class="tx"><b>${nP.ora?'Ore '+esc(nP.ora):'Prova'}${nP.luogo?' · '+esc(nP.luogo):''}</b><div>${(nP.canti||[]).length} canti da preparare</div></div></div><div style="padding:6px 12px 12px"><button class="lnk" data-act="tab" data-tab="prove">Vedi i canti della prova →</button></div></div>`:'';
   const nextA=S.appts.filter(a=>a.data>=todayStr()).sort(cmpAppt).slice(0,3);
   const lastAud=S.audios.slice(0,3);
   const others=up.filter(p=>!sel||p.id!==sel.id);
-  const side=`
+  const side=provaMini+`
     ${others.length||past.length?`<div class="card side-card"><h3>Altri programmi</h3><div class="plist">
       ${others.map(p=>progItem(p,sel)).join('')}
       ${past.length?`<div class="item" data-act="past-progs" style="color:var(--muted);font-size:13px">${S.showPastProgs?'Nascondi':'Mostra'} programmi passati (${past.length})</div>`:''}
@@ -487,8 +533,8 @@ function viewDomenica(){
   return head+`<div class="grid2"><div>${main}</div><div>${side}</div></div>`;
 }
 function progItem(p,sel){return `<div class="item ${sel&&sel.id===p.id?'sel':''}" data-act="prog-sel" data-id="${esc(p.id)}"><div class="dt" style="flex:0 0 44px;text-align:center"><b class="serif" style="display:block;font-size:24px;line-height:1;color:var(--navy)">${pd(p.data).getDate()}</b><span style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)">${esc(F({month:'short'}).format(pd(p.data)).replace('.',''))}</span></div><div style="flex:1;min-width:0"><b style="font-weight:600">${esc(p.titolo||'Santa Messa')}</b><div style="font-size:12.5px;color:var(--muted)">${esc(TEM_L[p.tempo]||'')}</div></div></div>`;}
-function progRow(x,i){
-  const c=cantoById(x.c);const auds=c?audiosFor(c.id):[];const key='p'+i+'-'+x.c;
+function progRow(x,i,pre){
+  const c=cantoById(x.c);const auds=c?audiosFor(c.id):[];const key=(pre||'p')+i+'-'+x.c;
   return `<div class="prow"><div class="mo">${esc(x.label||MOM_L[x.m]||x.m)}</div>
     <div>${c?`<div class="ti">${esc(c.titolo)}</div>${c.autore?`<div class="au">${esc(c.autore)}</div>`:''}`:`<div class="ti muted">Canto non più in repertorio</div>`}</div>
     <div class="ac">${c&&cUrl(c)?`<a class="pill-btn" href="${esc(safeUrl(cUrl(c)))}" target="_blank" rel="noopener">${ic('doc',15)}Spartito</a>`:''}
@@ -518,6 +564,121 @@ function lettureCard(date){
     <div class="lett-f"><span>Testi liturgici: Evangelizo.org</span><a class="lnk" href="${esc(fonte)}" target="_blank" rel="noopener">Apri su Vatican News ↗</a></div>
   </div>`;
 }
+
+/* ---------- Prove ---------- */
+function cmpP(a,b){return (a.data+(a.ora||'')).localeCompare(b.data+(b.ora||''));}
+function viewProve(){
+  const t=todayStr();const up=S.prove.filter(p=>p.data>=t).sort(cmpP);const past=S.prove.filter(p=>p.data<t).sort(cmpP).reverse();
+  const head=`<div class="page-head"><div><div class="eyebrow">Canti da preparare</div><h1>Prove</h1></div>${can2.prove()?`<button class="btn gold" data-act="prova-new">${ic('plus',16,2.2)}Nuova prova</button>`:''}</div>`;
+  if(!S.loaded.prove)return head+`<div class="loading">Caricamento…</div>`;
+  let h=up.length?`<div class="stack">${up.map(provaCard).join('')}</div>`:`<div class="empty"><b>Nessuna prova in programma</b>${can2.prove()?'Aggiungi la prossima prova con i canti da preparare.':'Qui troverai i canti da studiare per le prossime prove.'}</div>`;
+  if(past.length){h+=`<div style="margin-top:22px"><button class="lnk" data-act="past-prove">${S.showPastProve?'Nascondi':'Mostra'} prove passate (${past.length})</button></div>`;if(S.showPastProve)h+=`<div class="stack past" style="margin-top:10px">${past.map(provaCard).join('')}</div>`;}
+  return head+h;
+}
+function provaCard(p){
+  const canti=(p.canti||[]).filter(Boolean);
+  return `<div class="card" style="overflow:hidden"><div class="appt"><div class="dt"><b>${pd(p.data).getDate()}</b><span>${esc(fWd(p.data))}</span></div>
+    <div class="bd"><h3>${esc(p.titolo||'Prova del coro')}<span class="tag Prova">${esc(F({month:'long'}).format(pd(p.data)))}</span></h3>
+    <div class="mt">${p.ora?`<span>${ic('clock',14)}ore ${esc(p.ora)}${p.oraFine?' – '+esc(p.oraFine):''}</span>`:''}${p.luogo?`<span>${ic('pin',14)}${esc(p.luogo)}</span>`:''}<span>${canti.length} canti</span></div>
+    ${p.note?`<div class="nt">${esc(p.note)}</div>`:''}</div>
+    ${can2.prove()?`<div><button class="lnk" data-act="prova-edit" data-id="${esc(p.id)}">Modifica</button><button class="lnk" data-act="prova-del" data-id="${esc(p.id)}">Elimina</button></div>`:''}</div>
+    ${canti.length?`<div class="prog" style="margin-top:0;border-top:1px solid var(--line-2)">${canti.map((c,i)=>{const k=cantoById(c);return progRow({c,label:k?(MOM_L[k.momento]||''):''},i,'v'+p.id+'-');}).join('')}</div>`:''}
+  </div>`;
+}
+
+/* ---------- selettore canti con ricerca e anteprima ---------- */
+function cantoOptions(m,tempo,selected,q){
+  const byT=(a,b)=>a.titolo.localeCompare(b.titolo,'it');
+  const lab=c=>esc(c.titolo+(c.autore?' — '+c.autore:''));
+  const opt=c=>`<option value="${esc(c.id)}" ${c.id===selected?'selected':''}>${lab(c)}</option>`;
+  const nq=norm(q||'').trim();
+  let pool=S.canti;
+  if(nq){pool=pool.filter(c=>norm(c.titolo+' '+(c.autore||'')).includes(nq)||c.id===selected);}
+  const head=nq?`<option value="">${pool.length?'— '+pool.filter(c=>c.id!==selected||norm(c.titolo+' '+(c.autore||'')).includes(nq)).length+' risultati: scegli —':'— nessun canto trovato —'}</option>`:`<option value="">— scegli un canto —</option>`;
+  if(!m)return head+pool.slice().sort(byT).map(opt).join('');
+  const same=pool.filter(c=>c.momento===m);
+  const g1=same.filter(c=>tempo&&tempo!=='ordinario'&&c.tempo===tempo).sort(byT);
+  const g2=same.filter(c=>!g1.includes(c)).sort(byT);
+  const g3=pool.filter(c=>c.momento!==m).sort(byT);
+  return head+
+    (g1.length?`<optgroup label="${esc(MOM_L[m]||m)} · ${esc(TEM_L[tempo])}">${g1.map(opt).join('')}</optgroup>`:'')+
+    (g2.length?`<optgroup label="${esc(MOM_L[m]||m)}${g1.length?' · altri tempi':''}">${g2.map(opt).join('')}</optgroup>`:'')+
+    (g3.length?`<optgroup label="${nq?'Altri momenti':'Altri canti del repertorio'}">${g3.map(opt).join('')}</optgroup>`:'');
+}
+function thumbHtml(id){const c=id&&cantoById(id);if(!c)return `<div class="th empty">Anteprima</div>`;
+  const u=thumbUrl(c);return `<a class="th" href="${esc(safeUrl(cUrl(c)))}" target="_blank" rel="noopener" title="Apri lo spartito">${u?`<img src="${esc(u)}" alt="" loading="lazy" onerror="this.remove()">`:''}<span>${ic('doc',16)}</span></a>`;}
+function pickRow(k,i,c,tempo,removable){
+  return `<div class="pk" data-k="${k}" data-i="${i}"><div class="pk-l"><input type="search" class="pq" placeholder="Cerca per titolo o autore…" data-k="${k}" data-i="${i}" autocomplete="off">
+    <select data-k="${k}" data-i="${i}">${cantoOptions(k==='_all'?null:k,tempo,c,'')}</select></div>
+    <div class="pk-th">${thumbHtml(c)}</div>${removable?`<button type="button" class="lnk" data-rmc="${k}" data-i="${i}" title="Togli">${ic('x',14)}</button>`:''}</div>`;
+}
+function wirePicker(box,getTempo,setPick){
+  box.addEventListener('input',e=>{const q=e.target.closest('.pq');if(!q)return;const row=q.closest('.pk');const s=row.querySelector('select');
+    const k=row.dataset.k;s.innerHTML=cantoOptions(k==='_all'?null:k,getTempo(),s.value,q.value);
+    if(q.value.trim()){const opts=[...s.options].filter(o=>o.value);if(opts.length===1&&!s.value){s.value=opts[0].value;s.dispatchEvent(new Event('change',{bubbles:true}));}}});
+  box.addEventListener('change',e=>{const s=e.target.closest('select[data-k]');if(!s)return;const row=s.closest('.pk');setPick(row.dataset.k,+row.dataset.i,s.value);row.querySelector('.pk-th').innerHTML=thumbHtml(s.value);});
+}
+function provaForm(p){
+  const isNew=!p;const base=p?JSON.parse(JSON.stringify(p)):{data:todayStr(),ora:'',oraFine:'',luogo:'',titolo:'',note:'',canti:['']};
+  let picks=(base.canti&&base.canti.length?base.canti:['']).slice();
+  const draw=m=>{m.querySelector('#pc').innerHTML=picks.map((c,i)=>pickRow('_all',i,c,'',picks.length>1)).join('');};
+  openModal(`<h2>${isNew?'Nuova prova':'Modifica prova'}</h2><form id="f">
+    <div class="row3"><div class="field"><label>Data</label><input id="data" type="date" required value="${esc(base.data)}"></div>
+    <div class="field"><label>Ora inizio</label><input id="ora" type="time" value="${esc(base.ora)}"></div>
+    <div class="field"><label>Ora fine</label><input id="oraFine" type="time" value="${esc(base.oraFine)}"></div></div>
+    <div class="row2"><div class="field"><label>Titolo (facoltativo)</label><input id="titolo" maxlength="120" value="${esc(base.titolo)}" placeholder="Es. Prova per l'Immacolata"></div>
+    <div class="field"><label>Luogo</label><input id="luogo" maxlength="120" value="${esc(base.luogo)}"></div></div>
+    <div class="field"><label>Canti da provare</label><div class="pm" style="padding:10px"><div id="pc"></div><button type="button" class="btn ghost sm" id="addc" style="margin-top:6px">${ic('plus',14,2.2)}Aggiungi canto</button></div></div>
+    <div class="field"><label>Note per il coro</label><textarea id="note" maxlength="1500">${esc(base.note)}</textarea></div>
+    ${foot('Salva prova')}</form>`,m=>{
+    draw(m);
+    wirePicker(m.querySelector('#pc'),()=>'',(k,i,v)=>{picks[i]=v;});
+    m.querySelector('#pc').addEventListener('click',e=>{const b=e.target.closest('button[data-rmc]');if(!b)return;picks.splice(+b.dataset.i,1);draw(m);});
+    m.querySelector('#addc').onclick=()=>{picks.push('');draw(m);const qs=m.querySelectorAll('.pq');if(qs.length)qs[qs.length-1].focus();};
+    m.querySelector('#f').onsubmit=e=>{e.preventDefault();const g=id=>m.querySelector('#'+id).value.trim();
+      const d={data:g('data'),ora:g('ora'),oraFine:g('oraFine'),titolo:g('titolo'),luogo:g('luogo'),note:g('note'),canti:picks.filter(Boolean)};
+      guard(m,async()=>{apply(await api('saveProva',S.token,isNew?null:p.id,d));toast('Prova salvata');});};
+  },true);
+}
+
+/* ---------- notifiche push (OneSignal) ---------- */
+let osReady=false;
+function siteBase(){const p=location.pathname;return p.endsWith('/')?p:p.slice(0,p.lastIndexOf('/')+1);}
+function initPush(){
+  const id=S.pub&&S.pub.onesignal;if(!id||osReady)return;osReady=true;
+  window.OneSignalDeferred=window.OneSignalDeferred||[];
+  const s=document.createElement('script');s.src='https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js';s.defer=true;document.head.appendChild(s);
+  const base=siteBase();
+  OneSignalDeferred.push(async function(OS){
+    try{await OS.init({appId:id,serviceWorkerPath:base.replace(/^\//,'')+'OneSignalSDKWorker.js',serviceWorkerParam:{scope:base},allowLocalhostAsSecureOrigin:true});
+      S.os=OS;S.pushOn=!!(OS.User&&OS.User.PushSubscription&&OS.User.PushSubscription.optedIn);
+      OS.User.PushSubscription.addEventListener('change',ev=>{S.pushOn=!!(ev.current&&ev.current.optedIn);render();});render();}
+    catch(e){S.pushErr=true;render();}
+  });
+}
+function isIOS(){return /iPhone|iPad|iPod/.test(navigator.userAgent);}
+function isStandalone(){return (window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;}
+function notifBar(){
+  if(!(S.pub&&S.pub.onesignal)||S.pushOn)return '';
+  let dismissed=false;try{dismissed=localStorage.getItem('coro_push_no')==='1';}catch(e){}
+  if(dismissed)return '';
+  if(isIOS()&&!isStandalone())return `<div class="notif">${ic('M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9',18)}<span>Per ricevere le notifiche su iPhone: apri l'app in <b>Safari</b> → <b>Condividi</b> → <b>Aggiungi alla schermata Home</b>, poi aprila dall'icona.</span><button class="lnk" data-act="push-no">Chiudi</button></div>`;
+  if(!S.os)return '';
+  return `<div class="notif">${ic('M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9',18)}<span>Vuoi un avviso quando il direttore pubblica un programma, una prova o un appuntamento?</span><button class="btn gold sm" data-act="push-on">Attiva notifiche</button><button class="lnk" data-act="push-no">No grazie</button></div>`;
+}
+function notifForm(){
+  const n=S.notif||{};
+  openModal(`<h2>Notifiche push</h2><form id="f">
+    <p class="muted" style="font-size:13.5px;margin:0 0 12px">Crea un'app gratuita su onesignal.com (tipo "Web"), poi copia qui l'App ID e la REST API Key che trovi in Settings → Keys &amp; IDs.</p>
+    <div class="field"><label>OneSignal App ID</label><input id="appid" value="${esc(n.appId||'')}" placeholder="es. 1a2b3c4d-…"></div>
+    <div class="field"><label>REST API Key</label><input id="key" type="password" placeholder="${n.hasKey?'(già salvata: lascia vuoto per non cambiarla)':''}"></div>
+    ${foot('Salva',n.appId?'<button type="button" class="btn ghost" id="test" style="margin-right:auto">Invia notifica di prova</button>':'')}</form>`,m=>{
+    const t=m.querySelector('#test');if(t)t.onclick=async()=>{t.disabled=true;try{const r=await api('testNotif',S.token);toast(r||'Notifica inviata');}catch(e){m.querySelector('.err').textContent=errMsg(e);}t.disabled=false;};
+    m.querySelector('#f').onsubmit=e=>{e.preventDefault();
+      guard(m,async()=>{apply(await api('saveNotif',S.token,m.querySelector('#appid').value.trim(),m.querySelector('#key').value.trim(),location.origin+siteBase()));S.pub=await api('publicInfo');initPush();toast('Notifiche configurate');});};
+  });
+}
+
 /* ---------- Calendario ---------- */
 function cmpAppt(a,b){return (a.data+(a.ora||'')).localeCompare(b.data+(b.ora||''));}
 function viewCalendario(){
@@ -594,9 +755,10 @@ function viewSettings(){
   return `<div class="page-head"><div><div class="eyebrow">Solo direttore</div><h1>Impostazioni</h1></div></div>
   <div class="card">
     <div class="set-row"><div><div class="k">Parrocchia, coro e direttore</div><div class="v">${esc(cfg('parrocchia'))} · ${esc(nome())} · ${esc(cfg('sottotitolo'))}</div></div><button class="btn ghost sm" data-act="set-name">Modifica</button></div>
+    <div class="set-row"><div><div class="k">Notifiche push</div><div class="v">${S.notif&&S.notif.appId?'Attive: il coro riceve un avviso per ogni nuovo programma, prova o appuntamento':'Non configurate'}</div></div><button class="btn ghost sm" data-act="set-notif">${S.notif&&S.notif.appId?'Modifica':'Configura'}</button></div>
     ${Object.entries(ROLES).map(([k,r])=>`<div class="set-row"><div><div class="k">Password ${r.label}</div><div class="v">${pw[k]?'Impostata':'Nessuna password: accesso libero'}</div></div><button class="btn ghost sm" data-act="set-pw" data-role="${k}">Cambia</button></div>`).join('')}
   </div>
-  <p class="muted" style="font-size:13px;margin-top:14px">Le password separano le tre aree dell'app. Chi può modificare i dati dipende anche dall'accesso che dai a ciascuno quando condividi l'app su claude.ai.</p>`;
+  <p class="muted" style="font-size:13px;margin-top:14px">Le password separano le tre aree dell'app: il server controlla ogni modifica, quindi chi entra come corista può solo consultare.</p>`;
 }
 
 /* ================= modali ================= */
@@ -620,7 +782,7 @@ function pickRole(role){
   });
 }
 async function doLogin(role,pw){
-  const r=await api('login',role,pw);
+  const r=await api('login',role,pw,location.origin+siteBase());
   S.token=r.token;S.role=role;S.tab='domenica';
   try{localStorage.setItem('coro_token',r.token);localStorage.setItem('coro_role',role);}catch(e){}
   render();await loadAll();window.scrollTo(0,0);
@@ -633,19 +795,6 @@ async function loadAll(){
 }
 
 /* ---------- programma ---------- */
-function cantoOptions(m,tempo,selected){
-  const byT=(a,b)=>a.titolo.localeCompare(b.titolo,'it');
-  const lab=c=>esc(c.titolo+(c.autore?' — '+c.autore:''));
-  const opt=c=>`<option value="${esc(c.id)}" ${c.id===selected?'selected':''}>${lab(c)}</option>`;
-  const same=S.canti.filter(c=>c.momento===m);
-  const g1=same.filter(c=>tempo&&tempo!=='ordinario'&&c.tempo===tempo).sort(byT);
-  const g2=same.filter(c=>!g1.includes(c)).sort(byT);
-  const g3=S.canti.filter(c=>c.momento!==m).sort(byT);
-  return `<option value="">— scegli un canto —</option>`+
-    (g1.length?`<optgroup label="${esc(MOM_L[m]||m)} · ${esc(TEM_L[tempo])}">${g1.map(opt).join('')}</optgroup>`:'')+
-    (g2.length?`<optgroup label="${esc(MOM_L[m]||m)}${g1.length?' · altri tempi':''}">${g2.map(opt).join('')}</optgroup>`:'')+
-    `<optgroup label="Altri canti del repertorio">${g3.map(opt).join('')}</optgroup>`;
-}
 function progForm(p,dup){
   const isNew=!p||dup;
   const base=p?JSON.parse(JSON.stringify(p)):{data:nextSunday(),titolo:'',tempo:'ordinario',ora:'',luogo:'',note:'',scelte:MESSA_DEF.map(m=>({m,c:''}))};
@@ -656,7 +805,7 @@ function progForm(p,dup){
   const draw=m=>{
     const tempo=m.querySelector('#tempo').value;
     m.querySelector('#moms').innerHTML=order.map(k=>`<div class="pm" data-m="${k}"><div class="h"><b>${esc(MOM_L[k]||k)}</b><span><button type="button" class="lnk" data-addc="${k}">+ altro canto</button><button type="button" class="lnk" data-rmm="${k}">Rimuovi</button></span></div>
-      ${picks[k].map((c,i)=>`<div class="sel"><select data-k="${k}" data-i="${i}">${cantoOptions(k,tempo,c)}</select>${picks[k].length>1?`<button type="button" class="lnk" data-rmc="${k}" data-i="${i}">${ic('x',14)}</button>`:''}</div>`).join('')}</div>`).join('');
+      ${picks[k].map((c,i)=>pickRow(k,i,c,tempo,picks[k].length>1)).join('')}</div>`).join('');
     const avail=MOMENTI.filter(([k])=>!order.includes(k)&&k!=='altro');
     m.querySelector('#addm').innerHTML=`<option value="">+ Aggiungi un momento…</option>`+avail.map(([k,l])=>`<option value="${k}">${l}</option>`).join('');
   };
@@ -671,7 +820,7 @@ function progForm(p,dup){
     ${foot('Salva programma')}</form>`,m=>{
     draw(m);
     m.querySelector('#tempo').onchange=()=>draw(m);
-    m.querySelector('#moms').addEventListener('change',e=>{const s=e.target.closest('select[data-k]');if(s)picks[s.dataset.k][+s.dataset.i]=s.value;});
+    wirePicker(m.querySelector('#moms'),()=>m.querySelector('#tempo').value,(k,i,v)=>{picks[k][i]=v;});
     m.querySelector('#moms').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
       if(b.dataset.addc){picks[b.dataset.addc].push('');draw(m);}
       else if(b.dataset.rmm){const k=b.dataset.rmm;order=order.filter(x=>x!==k);delete picks[k];draw(m);}
@@ -818,6 +967,14 @@ $app.addEventListener('click',e=>{
     case 'play':S.playing=S.playing===el.dataset.key?null:el.dataset.key;render();break;
     case 'prog-sel':S.selProg=id;S.playing=null;render();window.scrollTo(0,0);break;
     case 'prog-new':progForm();break;
+    case 'prova-new':provaForm();break;
+    case 'prova-edit':provaForm(find(S.prove));break;
+    case 'prova-del':{const p=find(S.prove);confirmBox('Eliminare la prova?',`La prova del ${fLong(p.data)} verrà eliminata.`,'Elimina',async()=>apply(await api('delProva',S.token,id)));break;}
+    case 'past-prove':S.showPastProve=!S.showPastProve;render();break;
+    case 'news-ok':try{localStorage.setItem('coro_seen_'+S.role,String(Date.now()));}catch(e){}S.news=[];render();break;
+    case 'push-on':if(S.os){S.os.Notifications.requestPermission().then(()=>{setTimeout(render,800);}).catch(()=>toast('Notifiche non attivate'));}break;
+    case 'push-no':try{localStorage.setItem('coro_push_no','1');}catch(e){}render();break;
+    case 'set-notif':notifForm();break;
     case 'prog-edit':progForm(find(S.progs));break;
     case 'prog-dup':progForm(find(S.progs),true);break;
     case 'prog-del':{const p=find(S.progs);confirmBox('Eliminare il programma?',`Il programma del ${fLong(p.data)} verrà eliminato.`,'Elimina',async()=>{apply(await api('delProg',S.token,id));S.selProg=null;});break;}
@@ -840,11 +997,12 @@ $app.addEventListener('click',e=>{
 
 /* ================= dati ================= */
 render();
-api('publicInfo').then(p=>{S.pub=p;if(!S.role)render();}).catch(()=>{S.netErr=true;render();});
+api('publicInfo').then(p=>{S.pub=p;initPush();render();}).catch(()=>{S.netErr=true;render();});
 if(S.token)loadAll();
 setInterval(()=>{if(S.token&&document.visibilityState==='visible'&&!busy&&$modal.classList.contains('hidden'))loadAll();},120000);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&S.token&&Date.now()-(S.lastLoad||0)>30000)loadAll();});
 })();
+
 
 </script>
 </body>
