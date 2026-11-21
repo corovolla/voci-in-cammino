@@ -269,6 +269,29 @@ details.grp[open] summary{border-bottom:1px solid var(--line-2)}
 .notif span{flex:1;min-width:200px}
 .notif .lnk{color:#c9cdd8}
 .notif .lnk:hover{background:rgba(255,255,255,.1);color:#fff}
+
+/* ===== Proposta canti ===== */
+.pr-ctl{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;background:var(--ivory);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:14px}
+.pr-ctl input[type=date],.pr-ctl select{border:1px solid var(--line);border-radius:9px;padding:8px 10px;background:#fff}
+.pr-opt{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500}
+.pr-info{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+.pr-lett{border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:12px;font-size:13.5px}
+.pr-lett summary{cursor:pointer;color:var(--navy);font-weight:500}
+.pr-lt{margin-top:10px}.pr-lt div{font-family:var(--serif);font-size:16px;white-space:pre-wrap;margin-top:4px;max-height:160px;overflow:auto}
+.pr-tab{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.pr-row{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 14px;border-top:1px solid var(--line-2)}
+.pr-row:first-child{border-top:0}
+.pr-mo{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-2);padding-top:4px}
+.pr-pk{display:flex;gap:12px;align-items:flex-start}
+.pr-pk .th{width:46px;height:60px;flex:0 0 46px}
+.pr-t{font-family:var(--serif);font-size:19px;font-weight:600;line-height:1.2}
+.pr-a{color:var(--muted);font-size:12.5px}
+.pr-why{font-size:12px;color:#2f6a43;margin-top:3px}
+.pr-w{font-size:12px;color:#8d6c38;margin-top:3px}
+.pr-alts{margin-top:6px;font-size:12.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.pr-alt{border:1px solid var(--line);background:#fff;border-radius:999px;padding:3px 9px;font-size:12px;cursor:pointer;color:var(--navy)}
+.pr-alt:hover{border-color:var(--gold);color:var(--gold-2)}
+@media (max-width:600px){.pr-row{grid-template-columns:1fr;gap:4px}}
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:11px 18px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:60;font-size:14px;max-width:90vw;box-shadow:0 10px 30px rgba(0,0,0,.2)}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 
@@ -312,6 +335,7 @@ setTimeout(function(){var a=document.getElementById('app');if(a&&a.textContent.i
 window.addEventListener('error',function(e){window.__coroErr((e.message||'errore')+' (riga '+(e.lineno||'?')+')');});
 </script>
 <script>
+
 
 
 (function(){
@@ -494,7 +518,7 @@ function viewDomenica(){
   let sel=S.selProg&&S.progs.find(p=>p.id===S.selProg);
   if(!sel)sel=up[0]||past[0]||null;
   const head=`<div class="page-head"><div><div class="eyebrow">Programma dei canti</div><h1>La domenica del coro</h1></div>
-    ${can.progs()?`<button class="btn gold" data-act="prog-new">${ic('plus',16,2.2)}Nuovo programma</button>`:''}</div>`;
+    ${can.progs()?`<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost" data-act="proposta">${ic('M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6l-4.9 3.6 1.9-5.8L4 8.8h6.1z',16)}Proposta canti</button><button class="btn gold" data-act="prog-new">${ic('plus',16,2.2)}Nuovo programma</button></div>`:''}</div>`;
   if(!S.loaded.progs||!S.loaded.canti)return head+`<div class="loading">Caricamento…</div>`;
   let main='';
   if(!sel){
@@ -679,6 +703,143 @@ function notifForm(){
   });
 }
 
+
+/* ---------- proposta automatica dei canti ---------- */
+function ymd(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function addDays(d,n){const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()+n);return x;}
+function easterDate(y){const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1;return new Date(y,mo-1,da);}
+function adventStart(y){const xm=new Date(y,11,25);const w=xm.getDay();const adv4=addDays(xm,-(w===0?7:w));return addDays(adv4,-21);}
+function tempoDi(dateStr){
+  const d=pd(dateStr),y=d.getFullYear(),s=ymd(d);
+  const md=s.slice(5);
+  const E=easterDate(y),ash=addDays(E,-46),pent=addDays(E,49);
+  const adv=adventStart(y);
+  const ep=new Date(y,0,6);const bapt=addDays(ep,7-ep.getDay()===0?7:7-ep.getDay());
+  let t='ordinario';
+  if(s>=ymd(adv)&&md<'12-25')t='avvento';
+  else if(md>='12-25'||s<=ymd(bapt))t='natale';
+  else if(s>=ymd(ash)&&s<ymd(E))t='quaresima';
+  else if(s===ymd(pent))t='pentecoste';
+  else if(s>=ymd(E)&&s<ymd(pent))t='pasqua';
+  const mariano=['12-08','08-15','01-01','03-25','09-08','05-31','10-07'].includes(md);
+  return {tempo:t,mariano,solenne:mariano||['12-25','01-06','08-15','11-01','06-29','03-19'].includes(md)||s===ymd(E)||s===ymd(pent)};
+}
+const STOP=new Set('alla allo alle agli dalla dalle dagli dello della delle degli nella nelle negli sulla sulle sugli come come anche ancora perche perché quando quindi questa questo questi queste quella quello quelle quelli sono siamo siete essere stato stata fosse tutto tutti tutta tutte ogni molto poco loro nostro nostra nostri vostro vostra mio mia miei tuoi tuo tua suoi suo sua egli ella esso essa dice disse detto fare fatto dopo prima sempre mentre dove allora perciò pero però invece ecco cosi così tanto ciascuno nessuno verso fino senza contro sopra sotto dentro fuori anche ecco signore dio gesù gesu cristo popolo parola dal del delle che chi non una uno per con tra fra'.split(' '));
+function stems(txt){return [...new Set(norm(txt).replace(/[^a-z\s]/g,' ').split(/\s+/).filter(w=>w.length>=4&&!STOP.has(w)).map(w=>w.slice(0,6)))];}
+function hashN(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return (h>>>0);}
+function messaPerTempo(tempo,anno,needGloria){
+  const parts=['kyrie','gloria','sanctus','agnus'];
+  const canon={kyrie:/^(kyrie|signore)/i,gloria:/^gloria/i,sanctus:/^santo/i,agnus:/^agnello|^agnus/i};
+  const sets={};S.canti.forEach(c=>{if(!c.autore||!parts.includes(c.momento))return;const o=(sets[c.autore]=sets[c.autore]||{});
+    const cur=o[c.momento]&&cantoById(o[c.momento]);if(!cur||(!canon[c.momento].test(cur.titolo)&&canon[c.momento].test(c.titolo)))o[c.momento]=c.id;});
+  const req=needGloria?parts:['kyrie','sanctus','agnus'];
+  const list=Object.entries(sets).map(([a,p])=>({a,p})).filter(x=>req.every(k=>x.p[k])).sort((x,y)=>x.a.localeCompare(y.a));
+  if(!list.length)return null;
+  return list[hashN(tempo+anno)%list.length];
+}
+function proponi(opts){
+  const tempo=opts.tempo, info=opts.info||{tempo,mariano:tempo==='mariano',solenne:false};
+  const L=opts.letture&&opts.letture.ok?opts.letture:null;
+  const seed=(opts.date||tempo)+'';
+  const allTxt=L?L.letture.map(x=>x.testo).join(' ')+' '+(L.titolo||''):'';
+  const gosp=L?(L.letture.find(x=>x.k==='GSP')||{}).testo||'':'';
+  const S1=new Set(stems(allTxt)),SG=new Set(stems(gosp));
+  const ps=L?(L.letture.find(x=>x.k==='PS')||{}):{};
+  const psNum=((ps.rif||'').match(/Sal\s*(\d+)/i)||[])[1];
+  const psSt=new Set(stems(ps.testo||''));
+  const recent=new Set();S.progs.filter(p=>p.data<(opts.date||'9999')&&p.data>=ymd(addDays(pd(opts.date||todayStr()),-35))).forEach(p=>(p.scelte||[]).forEach(x=>recent.add(x.c)));
+  const strong=['avvento','natale','quaresima','pasqua','pentecoste'];
+  const t=info.tempo==='mariano'?'ordinario':info.tempo;
+  const mar=info.mariano||tempo==='mariano';
+  const titleLit=norm(L&&L.titolo||'');
+  const glory=!((t==='avvento'||t==='quaresima')&&!info.solenne&&!/solennit|immacolata|annunciazione|giuseppe/.test(titleLit));
+  const score=(c,m)=>{
+    let s=0;const why=[];
+    if(c.momento===m)s+=10;
+    if(c.tempo===t&&t!=='ordinario'){s+=9;why.push(TEM_L[t]);}
+    else if(c.tempo==='ordinario')s+=t==='ordinario'?3:1;
+    else if(c.tempo==='mariano'){if(mar){s+=9;why.push('mariano');}else s+=(m==='finale'?-1:-6);}
+    else if(strong.includes(c.tempo)&&c.tempo!==t)s-=18;
+    if(t==='pentecoste'&&c.tempo==='pasqua')s+=6;
+    if(t==='quaresima'&&/alleluia/i.test(c.titolo))s-=40;
+    const st=stems(c.titolo);let k=0;st.forEach(w=>{if(SG.has(w))k+=2;else if(S1.has(w))k+=1;});
+    if(k){s+=Math.min(12,k*3);why.push('richiama le letture');}
+    if(m==='salmo'){const n=((c.titolo||'').match(/salmo\s*(\d+)/i)||[])[1];if(psNum&&n===psNum){s+=40;why.push('è il salmo del giorno');}
+      let pk=0;st.forEach(w=>{if(psSt.has(w))pk++;});if(pk>=2){s+=12;if(!why.includes('richiama il salmo'))why.push('richiama il salmo');}}
+    if(recent.has(c.id))s-=7;
+    s+=(hashN(seed+c.id)%100)/100*3;
+    return {c,s,why};
+  };
+  const pool=(m)=>{
+    let cands=S.canti.filter(c=>c.momento===m);
+    if(m==='salmo')cands=cands.concat(S.canti.filter(c=>c.momento==='eucarestia'||c.momento==='ingresso'));
+    if(m==='acclamazione'&&t==='quaresima')cands=cands.filter(c=>!/alleluia/i.test(c.titolo));
+    return cands.map(c=>score(c,m)).filter(x=>m!=='salmo'||x.c.momento==='salmo'||x.s>=18).sort((a,b)=>b.s-a.s);
+  };
+  const order=['ingresso'];
+  if(t==='pasqua'&&false)order.push('aspersione');
+  order.push('kyrie');if(glory)order.push('gloria');order.push('salmo');if(t==='pentecoste')order.push('spirito');
+  order.push('acclamazione','offertorio','sanctus','agnus','eucarestia','finale');
+  const messa=messaPerTempo(t+(mar?'m':''),pd(opts.date||todayStr()).getFullYear(),glory);
+  const used=new Set();const out=[];
+  order.forEach(m=>{
+    let ranked=pool(m).filter(x=>!used.has(x.c.id));
+    let pick=null;
+    if(messa&&messa.p[m]&&['kyrie','gloria','sanctus','agnus'].includes(m)){const c=cantoById(messa.p[m]);if(c)pick={c,s:99,why:['messa “'+messa.a+'” per tutto il tempo']};}
+    if(m==='acclamazione'&&messa&&t!=='quaresima'){const a=S.canti.find(c=>c.momento==='acclamazione'&&c.autore===messa.a);if(a){const sc=score(a,m);if(sc.s>=ranked[0]?.s-6)pick={...sc,why:['stessa messa'].concat(sc.why)};}}
+    if(!pick)pick=ranked[0]||null;
+    let weak=false;
+    if(m==='salmo'&&L&&pick&&!pick.why.some(w=>/salmo/.test(w))){weak=true;}
+    if(pick)used.add(pick.c.id);
+    const alts=ranked.filter(x=>!pick||x.c.id!==pick.c.id).slice(0,3);
+    out.push({m,pick,alts,weak});
+  });
+  return {tempo:t,mariano:mar,gloria:glory,messa:messa&&messa.a,righe:out};
+}
+function propostaForm(){
+  const st={date:nextSunday(),mode:'data',tempo:'avvento',res:null,L:null,loading:false};
+  const body=m=>{
+    const r=st.res;const box=m.querySelector('#pr-res');
+    if(st.loading){box.innerHTML=`<div class="loading">Preparo la proposta…</div>`;return;}
+    if(!r){box.innerHTML='';return;}
+    const L=st.L;
+    let h='';
+    if(st.mode==='data'){
+      h+=`<div class="pr-info"><div><b>${esc(fLong(st.date))}</b>${L&&L.titolo?` · ${esc(L.titolo)}`:''}</div><div>${tl(r.tempo)}${r.mariano?' '+tl('mariano'):''}${!r.gloria?' <span class="muted" style="font-size:12.5px">· senza Gloria</span>':''}</div></div>`;
+      if(L&&L.ok)h+=`<details class="pr-lett"><summary>Letture: ${L.letture.map(x=>esc(x.rif||x.nome)).join(' · ')}</summary>${L.letture.map(x=>`<div class="pr-lt"><b>${esc(x.nome)}</b> ${esc(x.rif||'')}<div>${esc(x.testo)}</div></div>`).join('')}</details>`;
+      else h+=`<div class="muted" style="font-size:13px;margin:6px 0 10px">Le letture di questa data non sono ancora disponibili: la proposta si basa sul tempo liturgico. <a href="${esc(vnUrl(st.date))}" target="_blank" rel="noopener">Letture su Vatican News ↗</a></div>`;
+    }
+    h+=`<div class="pr-tab">${r.righe.map((x,i)=>{const c=x.pick&&x.pick.c;return `<div class="pr-row"><div class="pr-mo">${esc(MOM_L[x.m]||x.m)}</div>
+      <div class="pr-pk">${thumbHtml(c&&c.id)}<div>${c?`<div class="pr-t">${esc(c.titolo)}</div><div class="pr-a">${esc(c.autore||'')}</div>`:'<div class="pr-t muted">Nessun canto adatto</div>'}
+      ${x.weak?`<div class="pr-w">Il salmo del giorno non è nel repertorio: valuta di cantarlo su tono salmodico.</div>`:x.pick&&x.pick.why.length?`<div class="pr-why">${esc(x.pick.why.join(' · '))}</div>`:''}
+      ${x.alts.length?`<div class="pr-alts">Alternative: ${x.alts.map(a=>`<button type="button" class="pr-alt" data-i="${i}" data-c="${esc(a.c.id)}">${esc(a.c.titolo)}</button>`).join('')}</div>`:''}</div></div></div>`;}).join('')}</div>`;
+    h+=`<div class="foot" style="margin-top:14px"><button type="button" class="btn ghost" data-close>Chiudi</button><button type="button" class="btn gold" id="pr-use">Crea il programma con questa proposta</button></div>`;
+    box.innerHTML=h;
+    const u=box.querySelector('#pr-use');if(u)u.onclick=()=>{const p={data:st.mode==='data'?st.date:nextSunday(),titolo:(L&&L.titolo)||'',tempo:r.mariano&&r.tempo==='ordinario'?'mariano':r.tempo,ora:'',luogo:'',note:'',scelte:r.righe.filter(x=>x.pick).map(x=>({m:x.m,c:x.pick.c.id}))};closeModal();progForm(null,false,p);};
+  };
+  const run=async m=>{
+    st.loading=true;body(m);
+    try{
+      if(st.mode==='data'){const info=tempoDi(st.date);let L=null;try{L=await api('getLetture',S.token,st.date);}catch(e){L=null;}
+        st.L=L;st.res=proponi({date:st.date,tempo:info.tempo,info,letture:L});}
+      else{st.L=null;st.res=proponi({tempo:st.tempo,info:{tempo:st.tempo==='mariano'?'ordinario':st.tempo,mariano:st.tempo==='mariano',solenne:st.tempo==='mariano'}});}
+    }finally{st.loading=false;body(m);}
+  };
+  openModal(`<h2>Proposta canti</h2>
+    <div class="pr-ctl"><label class="pr-opt"><input type="radio" name="prm" value="data" checked> Per una data</label><input id="pr-date" type="date" value="${esc(st.date)}">
+    <label class="pr-opt"><input type="radio" name="prm" value="tempo"> Per un tempo liturgico</label><select id="pr-tempo">${TEMPI.map(([k,l])=>`<option value="${k}" ${k===st.tempo?'selected':''}>${l}</option>`).join('')}</select>
+    <button type="button" class="btn" id="pr-go">Proponi</button></div>
+    <div id="pr-res"></div>`,m=>{
+    const go=()=>{st.mode=m.querySelector('input[name=prm]:checked').value;st.date=m.querySelector('#pr-date').value||nextSunday();st.tempo=m.querySelector('#pr-tempo').value;run(m);};
+    m.querySelector('#pr-go').onclick=go;
+    m.querySelector('#pr-date').onchange=()=>{m.querySelector('input[value=data]').checked=true;go();};
+    m.querySelector('#pr-tempo').onchange=()=>{m.querySelector('input[value=tempo]').checked=true;go();};
+    m.querySelector('#pr-res').addEventListener('click',e=>{const b=e.target.closest('.pr-alt');if(!b||!st.res)return;const row=st.res.righe[+b.dataset.i];const c=cantoById(b.dataset.c);if(!c)return;
+      const old=row.pick;row.alts=row.alts.filter(a=>a.c.id!==c.id);if(old)row.alts.unshift(old);row.pick={c,s:0,why:['scelto da te']};row.weak=false;body(m);});
+    go();
+  },true);
+}
+
 /* ---------- Calendario ---------- */
 function cmpAppt(a,b){return (a.data+(a.ora||'')).localeCompare(b.data+(b.ora||''));}
 function viewCalendario(){
@@ -795,9 +956,9 @@ async function loadAll(){
 }
 
 /* ---------- programma ---------- */
-function progForm(p,dup){
+function progForm(p,dup,prefill){
   const isNew=!p||dup;
-  const base=p?JSON.parse(JSON.stringify(p)):{data:nextSunday(),titolo:'',tempo:'ordinario',ora:'',luogo:'',note:'',scelte:MESSA_DEF.map(m=>({m,c:''}))};
+  const base=prefill?JSON.parse(JSON.stringify(prefill)):p?JSON.parse(JSON.stringify(p)):{data:nextSunday(),titolo:'',tempo:'ordinario',ora:'',luogo:'',note:'',scelte:MESSA_DEF.map(m=>({m,c:''}))};
   if(dup){base.data=nextSunday();delete base.id;}
   // group scelte by momento preserving order
   let order=[],picks={};
@@ -815,10 +976,20 @@ function progForm(p,dup){
     <div class="field"><label>Tempo liturgico</label><select id="tempo">${TEMPI.map(([k,l])=>`<option value="${k}" ${base.tempo===k?'selected':''}>${l}</option>`).join('')}</select></div></div>
     <div class="row2"><div class="field"><label>Celebrazione</label><input id="titolo" maxlength="140" value="${esc(base.titolo)}" placeholder="Es. I Domenica di Avvento"></div>
     <div class="field"><label>Luogo (facoltativo)</label><input id="luogo" maxlength="120" value="${esc(base.luogo)}"></div></div>
-    <div class="field"><label>Canti per momento della Messa</label><div id="moms"></div><select id="addm" style="border:1px dashed var(--line);border-radius:10px;padding:9px 10px;background:#fff"></select></div>
+    <div class="field"><label style="display:flex;justify-content:space-between;align-items:center">Canti per momento della Messa<button type="button" class="btn ghost sm" id="auto">${ic('M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6l-4.9 3.6 1.9-5.8L4 8.8h6.1z',14)}Proponi canti</button></label><div class="status" id="autost"></div><div id="moms"></div><select id="addm" style="border:1px dashed var(--line);border-radius:10px;padding:9px 10px;background:#fff"></select></div>
     <div class="field"><label>Note per il coro (facoltative)</label><textarea id="note" maxlength="1500">${esc(base.note)}</textarea></div>
     ${foot('Salva programma')}</form>`,m=>{
     draw(m);
+    m.querySelector('#data').addEventListener('change',()=>{const t=tempoDi(m.querySelector('#data').value);const sel=m.querySelector('#tempo');sel.value=t.mariano&&t.tempo==='ordinario'?'mariano':t.tempo;draw(m);});
+    m.querySelector('#auto').onclick=async()=>{const b=m.querySelector('#auto'),stt=m.querySelector('#autost');b.disabled=true;stt.textContent='Leggo le letture e preparo la proposta…';
+      try{const date=m.querySelector('#data').value||nextSunday();const info=tempoDi(date);const tsel=m.querySelector('#tempo').value;if(tsel==='mariano')info.mariano=true;else info.tempo=tsel;
+        let L=null;try{L=await api('getLetture',S.token,date);}catch(e){}
+        const r=proponi({date,tempo:info.tempo,info,letture:L});
+        order=[];picks={};r.righe.forEach(x=>{order.push(x.m);picks[x.m]=[x.pick?x.pick.c.id:''];});
+        if(L&&L.titolo&&!m.querySelector('#titolo').value)m.querySelector('#titolo').value=L.titolo;
+        draw(m);stt.textContent=(L&&L.ok?'Proposta basata su letture e tempo liturgico':'Letture non ancora disponibili: proposta basata sul tempo liturgico')+'. Controlla e modifica come vuoi.';}
+      catch(e){stt.textContent='Proposta non riuscita: '+errMsg(e);}
+      b.disabled=false;};
     m.querySelector('#tempo').onchange=()=>draw(m);
     wirePicker(m.querySelector('#moms'),()=>m.querySelector('#tempo').value,(k,i,v)=>{picks[k][i]=v;});
     m.querySelector('#moms').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
@@ -967,6 +1138,7 @@ $app.addEventListener('click',e=>{
     case 'play':S.playing=S.playing===el.dataset.key?null:el.dataset.key;render();break;
     case 'prog-sel':S.selProg=id;S.playing=null;render();window.scrollTo(0,0);break;
     case 'prog-new':progForm();break;
+    case 'proposta':propostaForm();break;
     case 'prova-new':provaForm();break;
     case 'prova-edit':provaForm(find(S.prove));break;
     case 'prova-del':{const p=find(S.prove);confirmBox('Eliminare la prova?',`La prova del ${fLong(p.data)} verrà eliminata.`,'Elimina',async()=>apply(await api('delProva',S.token,id)));break;}
@@ -1002,6 +1174,7 @@ if(S.token)loadAll();
 setInterval(()=>{if(S.token&&document.visibilityState==='visible'&&!busy&&$modal.classList.contains('hidden'))loadAll();},120000);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&S.token&&Date.now()-(S.lastLoad||0)>30000)loadAll();});
 })();
+
 
 
 </script>
