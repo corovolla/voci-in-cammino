@@ -293,62 +293,9 @@ details.grp[open] summary{border-bottom:1px solid var(--line-2)}
 .pr-alt:hover{border-color:var(--gold);color:var(--gold-2)}
 @media (max-width:600px){.pr-row{grid-template-columns:1fr;gap:4px}}
 
-/* ===== Testi e accordi ===== */
-.sg-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-.sg-tools{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--ivory);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:16px}
-.sg-tr{display:inline-flex;align-items:center;gap:8px;font-size:14px}
-.sg{font-family:var(--serif);font-size:20px;line-height:1.35;color:#20242f}
-.sg-st{margin-bottom:18px}
-.sg-st.rit{font-weight:700}
-.sg-l{white-space:pre-wrap}
-.sg-rep{font-style:italic;font-weight:700;color:var(--gold-2);margin:-6px 0 18px}
-.cw{display:inline-block;white-space:pre;vertical-align:bottom}
-.cw .ch{display:block;font-family:var(--sans);font-size:13.5px;font-weight:700;color:#a8452f;line-height:1.3;padding-right:.45em;min-height:1.3em}
-.tx-list .canto:first-child{border-top:0}
-/* ===== Proiezione ===== */
-.pj{position:fixed;inset:0;z-index:100;background:#000;color:#fff;cursor:none;user-select:none;-webkit-user-select:none}
-.pj.ui{cursor:default}
-.pj-s{position:absolute;inset:4vh 5vw 4vh 5vw;display:flex;align-items:center;justify-content:center;text-align:center}
-.pj-t{max-width:100%;max-height:100%;font-family:Georgia,"Times New Roman",serif;line-height:1.28}
-.pj-t .l{display:block}
-.pj-t.rit{font-weight:700;color:#fff3d6}
-.pj-t.title .tt{display:block;font-family:var(--serif);font-weight:600;color:#e8d3ac}
-.pj-t.title .lb{display:block;font-family:var(--sans);font-size:.28em;letter-spacing:.2em;text-transform:uppercase;color:#9aa2b5;margin-bottom:.6em}
-.pj.black .pj-s{visibility:hidden}
-.pj-bar{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);display:flex;gap:6px;align-items:center;background:rgba(30,36,50,.92);border-radius:14px;padding:8px 10px;opacity:0;transition:opacity .25s;font:13px var(--sans);max-width:96vw;flex-wrap:wrap;justify-content:center}
-.pj.ui .pj-bar{opacity:1}
-.pj-bar button,.pj-bar select{background:rgba(255,255,255,.1);color:#fff;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;font:inherit}
-.pj-bar select{max-width:220px}
-.pj-bar select option{color:#000}
-.pj-bar span{color:#c9cdd8;padding:0 6px;white-space:nowrap}
-/* ===== Libretto ===== */
-.libv{position:fixed;inset:0;z-index:90;background:#5b6070;overflow:auto;-webkit-overflow-scrolling:touch}
-.lib-bar{position:sticky;top:0;z-index:2;display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--navy);color:#fff;padding:12px 16px}
-.lib-bar b{font-family:var(--serif);font-size:20px}
-.lib-pages{padding:24px 12px 60px;display:flex;flex-direction:column;align-items:center;gap:18px}
-.lib-page{background:#fff;color:#1a1e29;box-shadow:0 6px 24px rgba(0,0,0,.35);position:relative;overflow:hidden;flex:0 0 auto}
-.lib-in{position:absolute;overflow:hidden}
-.lib-num{position:absolute;left:0;right:0;text-align:center;font:10pt Georgia,serif;color:#6a6f7d}
-.lib,.lib-in{font-family:Georgia,"Times New Roman",serif}
-.lib .b,.lib-in .b{padding-bottom:.9em}
-.lib .st-l,.lib-in .st-l{white-space:pre-wrap;line-height:1.32}
-.lib .rit,.lib-in .rit{font-weight:700}
-.lib .rep,.lib-in .rep{font-style:italic;font-weight:700}
-.lib .s-t,.lib-in .s-t{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:1.45em;line-height:1.1;color:#13203a;border-bottom:1px solid #d9cdb4;padding-bottom:.15em;margin-top:.2em}
-.lib .s-t i,.lib-in .s-t i{font-style:normal;color:#b48f55;margin-right:.3em}
-.lib .s-a,.lib-in .s-a{font-size:.82em;color:#6a6f7d;margin-top:.2em}
-.lib .ix-h,.lib-in .ix-h{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:2em;color:#13203a;padding-bottom:.5em}
-.lib .ix,.lib-in .ix{display:flex;gap:.4em;align-items:baseline;line-height:1.5}
-.lib .ix i,.lib-in .ix i{font-style:normal;color:#b48f55;min-width:1.8em;text-align:right}
-.lib .ix span,.lib-in .ix span{flex:1;border-bottom:1px dotted #b8b0a0;min-width:1em;transform:translateY(-.25em)}
-.fr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12%}
-.fr .p{font:600 .8em Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#b48f55}
-.fr .n{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:2.6em;line-height:1.05;color:#13203a;margin:.5em 0 .3em}
-.fr .n em{font-weight:600}
-.fr svg{width:70%;margin:1.2em 0}
-.fr .t{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:2em;color:#13203a}
-.fr .s{font-size:1.1em;color:#4b5060;margin-top:.3em}
-.fr .d{position:absolute;bottom:10%;left:0;right:0;font-size:.95em;color:#6a6f7d}
+.avv{display:flex;align-items:center;gap:8px;background:var(--gold-soft);border:1px solid #eadcc1;border-radius:10px;padding:10px 12px;margin:4px 0 6px;font-size:14px;font-weight:500;color:#6e5426;cursor:pointer}
+.avv input{width:18px;height:18px;accent-color:var(--gold-2)}
+.notif-ok{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:#2f6a43;background:#e6f0e8;border-radius:999px;padding:4px 10px;margin-bottom:14px}
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:11px 18px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:60;font-size:14px;max-width:90vw;box-shadow:0 10px 30px rgba(0,0,0,.2)}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 
@@ -454,7 +401,12 @@ const fDur=x=>{if(!x&&x!==0)return'';x=Math.round(x);return Math.floor(x/60)+':'
 const fWhen=ms=>ms?F({day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}).format(new Date(ms)):'';
 const fDay=ms=>ms?F({day:'numeric',month:'short',year:'numeric'}).format(new Date(ms)):'';
 async function sha(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('coro::'+t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
-function toast(m){$toast.textContent=m;$toast.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>$toast.classList.remove('on'),3200);}
+function toast(m,ms){$toast.textContent=m;$toast.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>$toast.classList.remove('on'),ms||3200);}
+const avvisaBox=isNew=>S.pub&&S.pub.onesignal?`<label class="avv"><input type="checkbox" id="avvisa" ${isNew?'checked':''}> ${ic('M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9',15)} Invia una notifica al coro</label>`:'';
+const avvisaVal=m=>{const b=m.querySelector('#avvisa');return b?b.checked:false;};
+function notifToast(base,nr){if(!nr){toast(base);return;}
+  if(nr.ok)toast(base+' · notifica inviata'+(nr.count!=null?' a '+nr.count+(nr.count===1?' telefono':' telefoni'):''),4500);
+  else toast(base+'. Notifica NON inviata: '+(nr.msg||'errore'),9000);}
 function errMsg(e){
   const m=(e&&e.message)||String(e||'');
   if(/AUTH/.test(m)){setTimeout(logout,50);return 'Accesso scaduto: entra di nuovo.';}
@@ -472,7 +424,7 @@ async function api(fn,...args){
   if(!j||!j.ok)throw new Error((j&&j.error)||'Errore del server');
   return j.data;
 }
-function apply(d){if(!d)return;S.config=d.config;S.pwSet=d.pwSet||{};S.canti=d.canti||[];S.appts=d.appuntamenti||[];S.progs=d.programmi||[];S.audios=d.audio||[];S.links=d.links||[];S.prove=d.prove||[];S.notif=d.notif||{};S.testiDrive=d.testi||[];S.testiInfo=d.testiInfo||{};mergeTesti();S.catMeta={syncAt:d.syncAt};computeNews();Object.keys(S.loaded).forEach(k=>S.loaded[k]=true);S.lastLoad=Date.now();render();}
+function apply(d){if(!d)return;S.config=d.config;S.pwSet=d.pwSet||{};S.canti=d.canti||[];S.appts=d.appuntamenti||[];S.progs=d.programmi||[];S.audios=d.audio||[];S.links=d.links||[];S.prove=d.prove||[];S.notif=d.notif||{};S.catMeta={syncAt:d.syncAt};computeNews();Object.keys(S.loaded).forEach(k=>S.loaded[k]=true);S.lastLoad=Date.now();render();}
 const audioSrc=a=>a&&a.fileId?'https://drive.google.com/uc?export=download&id='+encodeURIComponent(a.fileId):'';
 const audioView=a=>a&&a.fileId?'https://drive.google.com/file/d/'+encodeURIComponent(a.fileId)+'/view':'#';
 const tl=t=>t?`<span class="tl ${esc(t)}"><i></i>${esc(TEM_L[t]||t)}</span>`:'';
@@ -483,7 +435,7 @@ const can={
   appts:()=>S.role==='direttore'||S.role==='segreteria',
   links:()=>S.role==='direttore'||S.role==='segreteria',
   audio:()=>S.role==='direttore',
-  progs:()=>S.role==='direttore'||S.role==='segreteria',
+  progs:()=>S.role==='direttore',
   canti:()=>S.role==='direttore',
   settings:()=>S.role==='direttore'
 };
@@ -575,7 +527,7 @@ function viewDomenica(){
   let sel=S.selProg&&S.progs.find(p=>p.id===S.selProg);
   if(!sel)sel=up[0]||past[0]||null;
   const head=`<div class="page-head"><div><div class="eyebrow">Programma dei canti</div><h1>La domenica del coro</h1></div>
-    ${can3.proposta()||can.progs()?`<div style="display:flex;gap:8px;flex-wrap:wrap">${can3.proposta()?`<button class="btn ghost" data-act="proposta">${ic('M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6l-4.9 3.6 1.9-5.8L4 8.8h6.1z',16)}Proposta canti</button>`:''}${can.progs()?`<button class="btn gold" data-act="prog-new">${ic('plus',16,2.2)}Nuovo programma</button>`:''}</div>`:''}</div>`;
+    ${can.progs()?`<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost" data-act="proposta">${ic('M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6l-4.9 3.6 1.9-5.8L4 8.8h6.1z',16)}Proposta canti</button><button class="btn gold" data-act="prog-new">${ic('plus',16,2.2)}Nuovo programma</button></div>`:''}</div>`;
   if(!S.loaded.progs||!S.loaded.canti)return head+`<div class="loading">Caricamento…</div>`;
   let main='';
   if(!sel){
@@ -584,7 +536,7 @@ function viewDomenica(){
     const isPast=sel.data<todayStr();
     const rows=(sel.scelte||[]).filter(x=>x&&x.c);
     main=`<div class="hero">${staff('lines')}
-      ${can.progs()||can3.proj()?`<div class="acts">${can3.proj()?`<button data-act="proj-prog" data-id="${esc(sel.id)}">▶ Proietta</button><button data-act="libretto" data-id="${esc(sel.id)}">Libretto</button>`:''}${can.progs()?`<button data-act="prog-edit" data-id="${esc(sel.id)}">Modifica</button><button data-act="prog-dup" data-id="${esc(sel.id)}">Duplica</button>${S.role==='direttore'?`<button data-act="prog-del" data-id="${esc(sel.id)}">Elimina</button>`:''}`:''}</div>`:''}
+      ${can.progs()?`<div class="acts">${S.pub&&S.pub.onesignal?`<button data-act="notif-send" data-kind="prog" data-id="${esc(sel.id)}">Avvisa il coro</button>`:''}<button data-act="prog-edit" data-id="${esc(sel.id)}">Modifica</button><button data-act="prog-dup" data-id="${esc(sel.id)}">Duplica</button><button data-act="prog-del" data-id="${esc(sel.id)}">Elimina</button></div>`:''}
       <div class="eyebrow">${isPast?'Celebrazione passata':'Prossima celebrazione'} · ${esc(fLong(sel.data))}${sel.ora?' · ore '+esc(sel.ora):''}</div>
       <h2>${esc(sel.titolo||'Santa Messa')}</h2>
       <div class="meta">${tl(sel.tempo)}${sel.luogo?`<span>${ic('pin',14)} ${esc(sel.luogo)}</span>`:''}</div>
@@ -618,7 +570,7 @@ function progRow(x,i,pre){
   const c=cantoById(x.c);const auds=c?audiosFor(c.id):[];const key=(pre||'p')+i+'-'+x.c;
   return `<div class="prow"><div class="mo">${esc(x.label||MOM_L[x.m]||x.m)}</div>
     <div>${c?`<div class="ti">${esc(c.titolo)}</div>${c.autore?`<div class="au">${esc(c.autore)}</div>`:''}`:`<div class="ti muted">Canto non più in repertorio</div>`}</div>
-    <div class="ac">${c&&testoFor(c)?txPill(testoFor(c)):''}${c&&cUrl(c)?`<a class="pill-btn" href="${esc(safeUrl(cUrl(c)))}" target="_blank" rel="noopener">${ic('doc',15)}Spartito</a>`:''}
+    <div class="ac">${c&&cUrl(c)?`<a class="pill-btn" href="${esc(safeUrl(cUrl(c)))}" target="_blank" rel="noopener">${ic('doc',15)}Spartito</a>`:''}
       ${auds.length?`<button class="pill-btn" data-act="play" data-key="${esc(key)}">${ic('play',13)}Ascolta</button>`:''}</div>
     ${auds.length&&S.playing===key?auds.map(a=>`<audio controls autoplay data-key="${esc(key+a.id)}" src="${esc(audioSrc(a))}" title="${esc(a.titolo)}"></audio>`).join(''):''}
   </div>`;
@@ -662,7 +614,7 @@ function provaCard(p){
     <div class="bd"><h3>${esc(p.titolo||'Prova del coro')}<span class="tag Prova">${esc(F({month:'long'}).format(pd(p.data)))}</span></h3>
     <div class="mt">${p.ora?`<span>${ic('clock',14)}ore ${esc(p.ora)}${p.oraFine?' – '+esc(p.oraFine):''}</span>`:''}${p.luogo?`<span>${ic('pin',14)}${esc(p.luogo)}</span>`:''}<span>${canti.length} canti</span></div>
     ${p.note?`<div class="nt">${esc(p.note)}</div>`:''}</div>
-    ${can2.prove()?`<div><button class="lnk" data-act="prova-edit" data-id="${esc(p.id)}">Modifica</button><button class="lnk" data-act="prova-del" data-id="${esc(p.id)}">Elimina</button></div>`:''}</div>
+    ${can2.prove()?`<div>${S.pub&&S.pub.onesignal?`<button class="lnk" data-act="notif-send" data-kind="prova" data-id="${esc(p.id)}">Avvisa il coro</button>`:''}<button class="lnk" data-act="prova-edit" data-id="${esc(p.id)}">Modifica</button><button class="lnk" data-act="prova-del" data-id="${esc(p.id)}">Elimina</button></div>`:''}</div>
     ${canti.length?`<div class="prog" style="margin-top:0;border-top:1px solid var(--line-2)">${canti.map((c,i)=>{const k=cantoById(c);return progRow({c,label:k?(MOM_L[k.momento]||''):''},i,'v'+p.id+'-');}).join('')}</div>`:''}
   </div>`;
 }
@@ -711,14 +663,14 @@ function provaForm(p){
     <div class="field"><label>Luogo</label><input id="luogo" maxlength="120" value="${esc(base.luogo)}"></div></div>
     <div class="field"><label>Canti da provare</label><div class="pm" style="padding:10px"><div id="pc"></div><button type="button" class="btn ghost sm" id="addc" style="margin-top:6px">${ic('plus',14,2.2)}Aggiungi canto</button></div></div>
     <div class="field"><label>Note per il coro</label><textarea id="note" maxlength="1500">${esc(base.note)}</textarea></div>
-    ${foot('Salva prova')}</form>`,m=>{
+    ${avvisaBox(isNew)}${foot('Salva prova')}</form>`,m=>{
     draw(m);
     wirePicker(m.querySelector('#pc'),()=>'',(k,i,v)=>{picks[i]=v;});
     m.querySelector('#pc').addEventListener('click',e=>{const b=e.target.closest('button[data-rmc]');if(!b)return;picks.splice(+b.dataset.i,1);draw(m);});
     m.querySelector('#addc').onclick=()=>{picks.push('');draw(m);const qs=m.querySelectorAll('.pq');if(qs.length)qs[qs.length-1].focus();};
     m.querySelector('#f').onsubmit=e=>{e.preventDefault();const g=id=>m.querySelector('#'+id).value.trim();
-      const d={data:g('data'),ora:g('ora'),oraFine:g('oraFine'),titolo:g('titolo'),luogo:g('luogo'),note:g('note'),canti:picks.filter(Boolean)};
-      guard(m,async()=>{apply(await api('saveProva',S.token,isNew?null:p.id,d));toast('Prova salvata');});};
+      const d={data:g('data'),ora:g('ora'),oraFine:g('oraFine'),titolo:g('titolo'),luogo:g('luogo'),note:g('note'),canti:picks.filter(Boolean),avvisa:avvisaVal(m)};
+      guard(m,async()=>{const r=await api('saveProva',S.token,isNew?null:p.id,d);apply(r);notifToast('Prova salvata',r.notifResult);});};
   },true);
 }
 
@@ -740,7 +692,8 @@ function initPush(){
 function isIOS(){return /iPhone|iPad|iPod/.test(navigator.userAgent);}
 function isStandalone(){return (window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;}
 function notifBar(){
-  if(!(S.pub&&S.pub.onesignal)||S.pushOn)return '';
+  if(!(S.pub&&S.pub.onesignal))return '';
+  if(S.pushOn)return S.tab==='domenica'?`<div class="notif-ok">${ic('M20 6 9 17l-5-5',14,2.4)} Notifiche attive su questo telefono</div>`:'';
   let dismissed=false;try{dismissed=localStorage.getItem('coro_push_no')==='1';}catch(e){}
   if(dismissed)return '';
   if(isIOS()&&!isStandalone())return `<div class="notif">${ic('M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9',18)}<span>Per ricevere le notifiche su iPhone: apri l'app in <b>Safari</b> → <b>Condividi</b> → <b>Aggiungi alla schermata Home</b>, poi aprila dall'icona.</span><button class="lnk" data-act="push-no">Chiudi</button></div>`;
@@ -870,7 +823,7 @@ function propostaForm(){
       <div class="pr-pk">${thumbHtml(c&&c.id)}<div>${c?`<div class="pr-t">${esc(c.titolo)}</div><div class="pr-a">${esc(c.autore||'')}</div>`:'<div class="pr-t muted">Nessun canto adatto</div>'}
       ${x.weak?`<div class="pr-w">Il salmo del giorno non è nel repertorio: valuta di cantarlo su tono salmodico.</div>`:x.pick&&x.pick.why.length?`<div class="pr-why">${esc(x.pick.why.join(' · '))}</div>`:''}
       ${x.alts.length?`<div class="pr-alts">Alternative: ${x.alts.map(a=>`<button type="button" class="pr-alt" data-i="${i}" data-c="${esc(a.c.id)}">${esc(a.c.titolo)}</button>`).join('')}</div>`:''}</div></div></div>`;}).join('')}</div>`;
-    h+=`<div class="foot" style="margin-top:14px"><button type="button" class="btn ghost" data-close>Chiudi</button>${can.progs()?`<button type="button" class="btn gold" id="pr-use">Crea il programma con questa proposta</button>`:''}</div>`;
+    h+=`<div class="foot" style="margin-top:14px"><button type="button" class="btn ghost" data-close>Chiudi</button><button type="button" class="btn gold" id="pr-use">Crea il programma con questa proposta</button></div>`;
     box.innerHTML=h;
     const u=box.querySelector('#pr-use');if(u)u.onclick=()=>{const p={data:st.mode==='data'?st.date:nextSunday(),titolo:(L&&L.titolo)||'',tempo:r.mariano&&r.tempo==='ordinario'?'mariano':r.tempo,ora:'',luogo:'',note:'',scelte:r.righe.filter(x=>x.pick).map(x=>({m:x.m,c:x.pick.c.id}))};closeModal();progForm(null,false,p);};
   };
@@ -897,208 +850,6 @@ function propostaForm(){
   },true);
 }
 
-/* ---------- testi, accordi, proiezione, libretto ---------- */
-const can3={proj:()=>S.role==='direttore'||S.role==='segreteria',proposta:()=>S.role==='direttore'||S.role==='segreteria'};
-S.testi=[];S.tr={};S.showCh=true;
-function loadTesti(){
-  fetch('testi.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null)
-    .then(j=>{S.testiJson=(j&&Array.isArray(j.canti))?j.canti:[];mergeTesti();if(S.role)render();}).catch(()=>{});
-}
-function mergeTesti(){
-  const seen=new Set();const out=[];
-  (S.testiDrive||[]).concat(S.testiJson||[]).forEach(t0=>{if(!t0||!t0.titolo||!t0.testo)return;const k=nt(t0.titolo);if(!k||seen.has(k))return;seen.add(k);
-    const t=Object.assign({},t0);
-    if(t.titolo===t.titolo.toUpperCase()&&/[A-Z]/.test(t.titolo)){const c=cantoFor(t);t.titolo=c?c.titolo:t.titolo.charAt(0)+t.titolo.slice(1).toLowerCase();}
-    out.push(t);});
-  S.testi=out;
-}
-const nt=s=>norm(s).replace(/[^a-z0-9]+/g,' ').trim();
-function testoFor(c){if(!c)return null;return S.testi.find(t=>(t.drive&&t.drive===c.d)||(t.id&&t.id===c.id))||S.testi.find(t=>nt(t.titolo)===nt(c.titolo))||null;}
-function cantoFor(t){return S.canti.find(c=>(t.drive&&c.d===t.drive)||(t.id&&c.id===t.id))||S.canti.find(c=>nt(c.titolo)===nt(t.titolo))||null;}
-const txIdx=t=>S.testi.indexOf(t);
-/* accordi: notazione italiana (Do Re Mi…) o inglese (C D E…) */
-const IT_N=['Do','Re','Mi','Fa','Sol','La','Si'],IT_V=[0,2,4,5,7,9,11],EN_N=['C','D','E','F','G','A','B'];
-const OUT_IT=['Do','Do#','Re','Mib','Mi','Fa','Fa#','Sol','Lab','La','Sib','Si'],OUT_EN=['C','C#','D','Eb','E','F','F#','G','Ab','A','Bb','B'];
-const CH_RE=/^(Do|Re|Mi|Fa|Sol|La|Si|[A-G])([#b♯♭]?)((?:maj7?|M7|min|m|-|sus[24]?|dim7?|°|aug|\+|add[29]|[0-9]{1,2}|\(|\))*)(?:\/(Do|Re|Mi|Fa|Sol|La|Si|[A-G])([#b♯♭]?))?$/;
-function noteVal(r,a){const i=IT_N.indexOf(r);let v=i>=0?IT_V[i]:IT_V[EN_N.indexOf(r)];if(a==='#'||a==='♯')v++;else if(a==='b'||a==='♭')v--;return (v+12)%12;}
-function trCh(ch,n){if(!n)return ch;const m=String(ch).match(CH_RE);if(!m)return ch;const O=EN_N.includes(m[1])?OUT_EN:OUT_IT;
-  let s=O[(noteVal(m[1],m[2])+n+120)%12]+m[3];if(m[4])s+='/'+O[(noteVal(m[4],m[5])+n+120)%12];return s;}
-function isChordLine(l){const t=l.replace(/\*\*/g,'').trim().split(/\s+/).filter(x=>x&&x!=='|');return t.length>0&&t.every(x=>CH_RE.test(x));}
-function unbold(l){const m=l.match(/^(\s*)\*\*(.*?)\*\*\s*$/);return m?{t:m[1]+m[2],b:true}:{t:l.replace(/\*\*/g,''),b:false};}
-function mergeChords(cl,ll){const pos=[];cl.replace(/\S+/g,(x,i)=>{if(x!=='|')pos.push([i,x]);return x;});
-  const last=pos.length?pos[pos.length-1][0]:0;ll=(ll||'').padEnd(last,' ');let out='',p=0;
-  pos.forEach(([i,c])=>{out+=ll.slice(p,i)+'['+c+']';p=i;});return (out+ll.slice(p)).replace(/\s+$/,'');}
-function prepLines(txt){
-  const src=String(txt||'').replace(/\r/g,'').replace(/\t/g,'    ').split('\n');const out=[];
-  for(let i=0;i<src.length;i++){const l=src[i];
-    if(l.trim()&&!/\[/.test(l)&&isChordLine(l)){const cl=l.replace(/\*\*/g,'  ');const nx=src[i+1];
-      if(nx!==undefined&&nx.trim()&&!isChordLine(nx)){const u=unbold(nx);out.push({t:mergeChords(cl,u.t),b:u.b});i++;continue;}
-      out.push({t:cl.trim().split(/\s+/).map(c=>'['+c+'] ').join(''),b:false});continue;}
-    out.push(unbold(l));}
-  return out;
-}
-const REP_RE=/^\s*rit(?:ornello)?\s*[.:]?\s*(?:\(?\s*(?:bis|x\s*\d)\s*\)?)?\s*$/i;
-function parseSong(txt){
-  const st=[];let cur=[];const push=()=>{if(cur.length){st.push(cur);cur=[];}};
-  const TAIL_RE=/(?:\s{2,}|\s+(?=RIT))(?:RIT|Rit|rit)(?:ornello)?\s*[.:]?\s*$/;
-  prepLines(txt).forEach(L=>{const tt=L.t.replace(/\[[^\]]*\]/g,'');if(!tt.trim()&&!/\[/.test(L.t)){push();return;}if(REP_RE.test(tt)){push();st.push('REP');return;}
-    if(TAIL_RE.test(L.t)){cur.push({t:L.t.replace(TAIL_RE,''),b:L.b});push();st.push('REP');return;}cur.push(L);});push();
-  const blocks=[];let rit=null;
-  st.forEach(s=>{if(s==='REP'){blocks.push({k:'rep'});return;}
-    const ls=s.slice();let isR=ls.every(l=>l.b);
-    const m=ls[0].t.match(/^\s*rit(?:ornello)?\s*[.:]\s*(.*)$/i);
-    if(m){isR=true;ls[0]={t:m[1],b:ls[0].b};if(!ls[0].t.trim())ls.shift();}
-    if(!ls.length)return;
-    const b={k:isR?'rit':'v',lines:ls.map(l=>l.t)};if(isR&&!rit)rit=b;blocks.push(b);});
-  return {blocks,rit};
-}
-const plainL=l=>String(l).replace(/\[[^\]]*\]/g,'').replace(/\s{2,}/g,' ').trimEnd();
-function songHasCh(t){return parseSong(t.testo).blocks.some(b=>b.lines&&b.lines.some(l=>/\[[^\]]+\]/.test(l)));}
-function lineHtml(t,n,showCh){
-  const parts=String(t).split(/\[([^\]]+)\]/);
-  if(!showCh||parts.length===1)return esc(plainL(t))||'&nbsp;';
-  let h=parts[0]?`<span class="cw"><b class="ch"></b>${esc(parts[0])}</span>`:'';
-  for(let i=1;i<parts.length;i+=2)h+=`<span class="cw"><b class="ch">${esc(trCh(parts[i],n))}</b>${esc(parts[i+1]||'')||' '}</span>`;
-  return h;
-}
-function songBody(t,n,showCh){const P=parseSong(t.testo);
-  return P.blocks.map(b=>b.k==='rep'?`<div class="sg-rep">Rit.</div>`:`<div class="sg-st ${b.k==='rit'?'rit':''}">${b.lines.map(l=>`<div class="sg-l">${lineHtml(l,n,showCh)}</div>`).join('')}</div>`).join('');}
-function txPill(t,small){const i=txIdx(t);return i<0?'':`<button class="pill-btn" data-act="testo" data-tx="${i}">${ic('M4 6h16M4 12h16M4 18h10',small?14:15)}Testo</button>`;}
-function testoView(i){
-  const t=S.testi[i];if(!t)return;const c=cantoFor(t);const ch=songHasCh(t);
-  const tk=nt(t.titolo);const draw=m=>{const n=S.tr[tk]||0;const on=ch&&S.showCh;
-    m.querySelector('#sgc').innerHTML=(ch?`<div class="sg-tools"><label class="pr-opt"><input type="checkbox" id="sgch" ${S.showCh?'checked':''}> Mostra accordi</label>
-      ${on?`<span class="sg-tr"><button type="button" class="btn ghost sm" data-tr="-1">− ½ tono</button><span>${t.tono?'Tonalità <b>'+esc(trCh(t.tono,n))+'</b>':'Trasposizione'}${n?` (${n>0?'+':''}${n})`:''}</span><button type="button" class="btn ghost sm" data-tr="1">+ ½ tono</button>${n?'<button type="button" class="lnk" data-tr="0">Originale</button>':''}</span>`:''}</div>`:'')+
-      `<div class="sg">${songBody(t,n,on)}</div>`;};
-  openModal(`<div class="sg-h"><div><h2 style="margin:0">${esc(t.titolo)}</h2>${(t.autore||(c&&c.autore))?`<div class="muted">${esc(t.autore||c.autore)}</div>`:''}</div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap">${can3.proj()?`<button type="button" class="btn gold sm" id="sgp">${ic('M3 4h18v12H3zM8 20h8M12 16v4',14)}Proietta</button>`:''}${c&&cUrl(c)?`<a class="btn ghost sm" href="${esc(safeUrl(cUrl(c)))}" target="_blank" rel="noopener">Spartito</a>`:''}<button type="button" class="btn ghost sm" data-close>Chiudi</button></div></div><div id="sgc"></div>`,m=>{
-    draw(m);
-    m.querySelector('#sgc').addEventListener('click',e=>{const b=e.target.closest('[data-tr]');if(!b)return;const v=+b.dataset.tr;let n=v===0?0:(S.tr[tk]||0)+v;if(n>6)n-=12;if(n<-6)n+=12;S.tr[tk]=n;draw(m);});
-    m.querySelector('#sgc').addEventListener('change',e=>{if(e.target.id==='sgch'){S.showCh=e.target.checked;draw(m);}});
-    const p=m.querySelector('#sgp');if(p)p.onclick=()=>{closeModal();project([{t,lab:c?(MOM_L[c.momento]||''):''}]);};
-  },true);
-}
-/* ---- proiezione ---- */
-function buildSlides(items){
-  const sl=[];
-  items.forEach(({t,lab})=>{const P=parseSong(t.testo);sl.push({k:'title',titolo:t.titolo,lab,song:t.titolo});
-    P.blocks.forEach(b=>{const bb=b.k==='rep'?P.rit:b;if(!bb)return;const lines=bb.lines.map(plainL).filter(x=>x.trim());if(!lines.length)return;
-      const parts=lines.length>8?[lines.slice(0,Math.ceil(lines.length/2)),lines.slice(Math.ceil(lines.length/2))]:[lines];
-      parts.forEach(p=>sl.push({k:bb.k,lines:p,song:t.titolo}));});});
-  return sl;
-}
-function project(items){
-  if(!items.length){toast('Nessun testo da proiettare');return;}
-  const sl=buildSlides(items);let i=0,hideT=null;
-  const el=document.createElement('div');el.className='pj ui';el.id='proj';
-  const songs=[];sl.forEach((s,k)=>{if(s.k==='title')songs.push([k,s.titolo]);});
-  el.innerHTML=`<div class="pj-s"><div class="pj-t"></div></div><div class="pj-bar"><button data-pj="prev">◀</button><span id="pjc"></span><button data-pj="next">▶</button>
-    ${songs.length>1?`<select id="pjs">${songs.map(([k,n])=>`<option value="${k}">${esc(n)}</option>`).join('')}</select>`:''}
-    <button data-pj="black">Schermo nero</button><button data-pj="fs">Schermo intero</button><button data-pj="exit">Esci</button></div>`;
-  document.body.appendChild(el);
-  const box=el.querySelector('.pj-s'),tx=el.querySelector('.pj-t');
-  const fit=()=>{let lo=14,hi=Math.max(40,window.innerHeight*(tx.classList.contains('title')?0.13:0.105));for(let k=0;k<14;k++){const mid=(lo+hi)/2;tx.style.fontSize=mid+'px';if(tx.scrollHeight<=box.clientHeight&&tx.scrollWidth<=box.clientWidth&&tx.offsetHeight<=box.clientHeight&&tx.offsetWidth<=box.clientWidth)lo=mid;else hi=mid;}tx.style.fontSize=Math.floor(lo)+'px';};
-  const show=()=>{const s=sl[i];tx.className='pj-t '+(s.k==='title'?'title':s.k==='rit'?'rit':'');
-    tx.innerHTML=s.k==='title'?`${s.lab?`<span class="lb">${esc(s.lab)}</span>`:''}<span class="tt">${esc(s.titolo)}</span>`:s.lines.map(l=>`<span class="l">${esc(l)}</span>`).join('');
-    tx.style.whiteSpace='nowrap';fit();if(parseFloat(tx.style.fontSize)<34){tx.style.whiteSpace='normal';fit();}
-    el.querySelector('#pjc').textContent=(i+1)+' / '+sl.length;const ss=el.querySelector('#pjs');if(ss){let cur=0;songs.forEach(([k])=>{if(k<=i)cur=k;});ss.value=cur;}};
-  const go=d=>{const n=Math.max(0,Math.min(sl.length-1,i+d));if(n!==i){i=n;el.classList.remove('black');show();}};
-  const ui=()=>{el.classList.add('ui');clearTimeout(hideT);hideT=setTimeout(()=>el.classList.remove('ui'),2500);};
-  const exit=()=>{document.removeEventListener('keydown',key,true);window.removeEventListener('resize',show);clearTimeout(hideT);try{if(document.fullscreenElement)document.exitFullscreen();}catch(e){}el.remove();};
-  const key=e=>{const k=e.key;
-    if(['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(k)){e.preventDefault();e.stopPropagation();go(1);}
-    else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(k)){e.preventDefault();e.stopPropagation();go(-1);}
-    else if(k==='b'||k==='B'||k==='.'){e.preventDefault();el.classList.toggle('black');}
-    else if(k==='Home'){i=0;show();}else if(k==='End'){i=sl.length-1;show();}
-    else if(k==='Escape'){e.stopPropagation();exit();}};
-  document.addEventListener('keydown',key,true);window.addEventListener('resize',show);
-  el.addEventListener('mousemove',ui);
-  el.addEventListener('click',e=>{const b=e.target.closest('[data-pj]');
-    if(b){const a=b.dataset.pj;if(a==='prev')go(-1);else if(a==='next')go(1);else if(a==='black')el.classList.toggle('black');else if(a==='exit')exit();
-      else if(a==='fs'){try{document.fullscreenElement?document.exitFullscreen():el.requestFullscreen();}catch(err){}}ui();return;}
-    if(e.target.closest('.pj-bar'))return;
-    if(e.clientY>window.innerHeight*0.82){ui();return;}
-    go(e.clientX<window.innerWidth/3?-1:1);});
-  const ss=el.querySelector('#pjs');if(ss)ss.onchange=()=>{i=+ss.value;el.classList.remove('black');show();ui();};
-  try{if(el.requestFullscreen&&!/iPhone|iPad|iPod/.test(navigator.userAgent))el.requestFullscreen().catch(()=>{});}catch(e){}
-  show();ui();
-}
-function progItems(p){const out=[];let miss=0;(p.scelte||[]).forEach(x=>{const c=cantoById(x.c);const t=testoFor(c);if(t)out.push({t,lab:MOM_L[x.m]||''});else if(c)miss++;});return {out,miss};}
-function projectProg(id){const p=S.progs.find(x=>x.id===id);if(!p)return;const {out,miss}=progItems(p);
-  if(!out.length){toast('Nessun canto di questo programma ha ancora il testo');return;}
-  if(miss)toast(miss+(miss===1?' canto non ha':' canti non hanno')+' ancora il testo e non verrà proiettato');project(out);}
-/* ---- libretto ---- */
-function librettoForm(progId){
-  const p=progId&&S.progs.find(x=>x.id===progId);
-  const sub=p?`${p.titolo||'Santa Messa'} · ${fLong(p.data)}`:String(new Date().getFullYear());
-  openModal(`<h2>Libretto dei canti</h2><form id="f">
-    <div class="field"><label>Contenuto</label><select id="cont"><option value="tutti" ${p?'':'selected'}>Tutti i canti con testo (${S.testi.length})</option>${p?`<option value="prog" selected>Solo i canti del programma: ${esc(p.titolo||'Santa Messa')} · ${esc(fShort(p.data))}</option>`:''}</select></div>
-    <div class="field"><label>Titolo</label><input id="tit" maxlength="80" value="Libretto dei canti"></div>
-    <div class="field"><label>Sottotitolo</label><input id="sub" maxlength="120" value="${esc(sub)}"></div>
-    <div class="row2"><div class="field"><label>Formato pagina</label><select id="fmt"><option value="A5">A5 (libretto tascabile)</option><option value="A4">A4</option></select></div>
-    <div class="field"><label>Ordine dei canti</label><select id="ord"><option value="momento">Per momento della Messa</option><option value="alfa">Alfabetico</option></select></div></div>
-    <p class="muted" style="font-size:13px;margin:0 0 6px">Il libretto contiene solo il testo, senza accordi, con frontespizio e indice. Poi potrai stamparlo o salvarlo in PDF.</p>
-    ${foot('Crea libretto')}</form>`,m=>{
-    m.querySelector('#f').onsubmit=e=>{e.preventDefault();const g=id=>m.querySelector('#'+id).value.trim();
-      let items;
-      if(g('cont')==='prog'&&p){items=progItems(p).out.map(x=>({t:x.t,mom:x.lab}));}
-      else{items=S.testi.map(t=>{const c=cantoFor(t);return {t,mi:c?MOMENTI.findIndex(x=>x[0]===c.momento):99};});
-        if(g('ord')==='momento')items.sort((a,b)=>(a.mi<0?99:a.mi)-(b.mi<0?99:b.mi)||a.t.titolo.localeCompare(b.t.titolo,'it'));
-        else items.sort((a,b)=>a.t.titolo.localeCompare(b.t.titolo,'it'));}
-      if(g('cont')==='prog'&&g('ord')==='alfa')items.sort((a,b)=>a.t.titolo.localeCompare(b.t.titolo,'it'));
-      if(!items.length){m.querySelector('.err').textContent='Non ci sono canti con testo da inserire.';return;}
-      const o={tit:g('tit')||'Libretto dei canti',sub:g('sub'),fmt:g('fmt')};closeModal();buildLibretto(items,o).catch(er=>toast('Libretto non riuscito: '+(er&&er.message||er)));};
-  });
-}
-async function buildLibretto(items,o){
-  const F5=o.fmt==='A4'?{w:210,h:297,m:20,mb:26,fs:13}:{w:148,h:210,m:14,mb:20,fs:11};
-  const CW=F5.w-2*F5.m,CH=F5.h-F5.m-F5.mb,PX=96/25.4,HPX=CH*PX;
-  try{if(document.fonts&&document.fonts.ready)await document.fonts.ready;}catch(e){}
-  const meas=document.createElement('div');meas.className='lib';meas.style.cssText=`position:absolute;left:-10000px;top:0;width:${CW}mm;font-size:${F5.fs}pt;visibility:hidden`;document.body.appendChild(meas);
-  const hOf=html=>{meas.innerHTML=html;return meas.firstElementChild.getBoundingClientRect().height;};
-  const songBlocks=(t,n)=>{const P=parseSong(t.testo);const a=t.autore||((cantoFor(t)||{}).autore)||'';
-    const bl=[`<div class="b"><div class="s-t"><i>${n}.</i>${esc(t.titolo)}</div>${a?`<div class="s-a">${esc(a)}</div>`:''}</div>`];
-    P.blocks.forEach(b=>{if(b.k==='rep'){bl.push(`<div class="b rep">Rit.</div>`);return;}bl.push(`<div class="b ${b.k==='rit'?'rit':''}">${b.lines.map(l=>`<div class="st-l">${esc(plainL(l))||'&nbsp;'}</div>`).join('')}</div>`);});
-    return bl;};
-  const paginate=(blocks,keepFirst)=>{/* blocks: [{html,start?}] → pages:[[html]] + start pages */
-    const pages=[[]];let used=0;const starts=[];
-    blocks.forEach((b,k)=>{const h=hOf(b.html);let need=h;
-      if(b.start&&blocks[k+1])need=h+hOf(blocks[k+1].html);
-      if(used>0&&(used+need>HPX||(b.start&&HPX-used<HPX*0.22))){pages.push([]);used=0;}
-      if(b.start)starts.push(pages.length-1);
-      pages[pages.length-1].push(b.html);used+=h;});
-    return {pages,starts};};
-  // canti
-  const blocks=[];items.forEach((it,k)=>{songBlocks(it.t,k+1).forEach((h,j)=>blocks.push({html:h,start:j===0}));});
-  const S1=paginate(blocks);
-  // indice (alfabetico) – il numero di pagine dell'indice non dipende dai numeri di pagina
-  const ixList=items.map((it,k)=>({n:k+1,t:it.t.titolo,k})).sort((a,b)=>a.t.localeCompare(b.t,'it'));
-  const ixRow=(x,pg)=>`<div class="ix"><i>${x.n}.</i>${esc(x.t)}<span></span>${pg}</div>`;
-  const ixBlocks=[{html:`<div class="ix-h">Indice</div>`}].concat(ixList.map(x=>({html:ixRow(x,'000')})));
-  const IX=paginate(ixBlocks);
-  const first=1+IX.pages.length+1;
-  const pgOf=k=>first+S1.starts[k];
-  const ixPages=paginate([{html:`<div class="ix-h">Indice</div>`}].concat(ixList.map(x=>({html:ixRow(x,pgOf(x.k))})))).pages;
-  meas.remove();
-  // frontespizio
-  const n=nome();const nm=n.match(/^(.*?)\s*[“"](.+?)[”"]\s*$/);
-  const front=`<div class="fr" style="font-size:${F5.fs}pt"><div class="p">${esc(cfg('parrocchia'))}</div><div class="n">${nm?`${esc(nm[1])}<br><em>${esc(nm[2])}</em>`:esc(n)}</div>
-    <svg viewBox="0 0 600 60" preserveAspectRatio="none"><g stroke="#b48f55" stroke-width="1.4">${[6,18,30,42,54].map(y=>`<line x1="0" x2="600" y1="${y}" y2="${y}"/>`).join('')}</g></svg>
-    <div class="t">${esc(o.tit)}</div>${o.sub?`<div class="s">${esc(o.sub)}</div>`:''}<div class="d">${esc(cfg('sottotitolo'))}</div></div>`;
-  const page=(inner,num)=>`<div class="lib-page" style="width:${F5.w}mm;height:${F5.h}mm">${num===0?inner:`<div class="lib-in" style="left:${F5.m}mm;top:${F5.m}mm;width:${CW}mm;height:${CH}mm;font-size:${F5.fs}pt">${inner}</div><div class="lib-num" style="bottom:${F5.mb*0.45}mm">${num}</div>`}</div>`;
-  let all=[page(front,0)];let num=2;
-  ixPages.forEach(pg=>{all.push(page(pg.join(''),num++));});
-  S1.pages.forEach(pg=>{all.push(page(pg.join(''),num++));});
-  const old=document.getElementById('libv');if(old)old.remove();
-  let ps=document.getElementById('libprint');if(!ps){ps=document.createElement('style');ps.id='libprint';document.head.appendChild(ps);}
-  ps.textContent=`@page{size:${o.fmt==='A4'?'A4':'A5'} portrait;margin:0}
-    @media print{html,body{background:#fff!important}body>*:not(#libv){display:none!important}#libv{position:static!important;overflow:visible!important;background:none!important}.lib-bar{display:none!important}.lib-pages{padding:0!important;gap:0!important;display:block!important}.lib-page{box-shadow:none!important;margin:0!important;break-after:page;page-break-after:always}.lib-page:last-child{break-after:auto;page-break-after:auto}}`;
-  const v=document.createElement('div');v.id='libv';v.className='libv';
-  v.innerHTML=`<div class="lib-bar"><div><b>${esc(o.tit)}</b> <span style="color:#c9cdd8;font-size:13px">· ${all.length} pagine · formato ${esc(o.fmt)} · ${items.length} canti</span></div><div style="display:flex;gap:8px"><button class="btn gold sm" data-lib="print">Stampa o salva PDF</button><button class="btn ghost sm" data-lib="close">Chiudi</button></div></div><div class="lib-pages">${all.join('')}</div>`;
-  document.body.appendChild(v);
-  v.addEventListener('click',e=>{const b=e.target.closest('[data-lib]');if(!b)return;if(b.dataset.lib==='print')window.print();else v.remove();});
-}
-
 /* ---------- Calendario ---------- */
 function cmpAppt(a,b){return (a.data+(a.ora||'')).localeCompare(b.data+(b.ora||''));}
 function viewCalendario(){
@@ -1116,7 +867,7 @@ function apptCard(a){
     <div class="bd"><h3>${esc(a.titolo)}<span class="tag ${esc(a.tipo)}">${esc(a.tipo||'Prova')}</span></h3>
     <div class="mt">${ora?`<span>${ic('clock',14)}${esc(ora)}</span>`:''}${a.luogo?`<span>${ic('pin',14)}${esc(a.luogo)}</span>`:''}</div>
     ${a.note?`<div class="nt">${esc(a.note)}</div>`:''}</div>
-    ${can.appts()?`<div><button class="lnk" data-act="appt-edit" data-id="${esc(a.id)}">Modifica</button><button class="lnk" data-act="appt-del" data-id="${esc(a.id)}">Elimina</button></div>`:''}</div>`;
+    ${can.appts()?`<div>${S.pub&&S.pub.onesignal?`<button class="lnk" data-act="notif-send" data-kind="appt" data-id="${esc(a.id)}">Avvisa</button>`:''}<button class="lnk" data-act="appt-edit" data-id="${esc(a.id)}">Modifica</button><button class="lnk" data-act="appt-del" data-id="${esc(a.id)}">Elimina</button></div>`:''}</div>`;
 }
 
 /* ---------- Repertorio ---------- */
@@ -1131,7 +882,7 @@ function viewRepertorio(){
   return head+syncBar()+`<div class="filters"><div class="srch">${ic('search',16)}<input id="cq" type="search" placeholder="Cerca per titolo o autore…" value="${esc(S.cq)}"></div>
     <select id="cm"><option value="tutti">Tutti i momenti</option>${MOMENTI.map(([k,l])=>`<option value="${k}" ${S.cm===k?'selected':''}>${l}</option>`).join('')}</select>
     <select id="ct"><option value="tutti">Tutti i tempi</option>${TEMPI.map(([k,l])=>`<option value="${k}" ${S.ct===k?'selected':''}>${l}</option>`).join('')}</select></div>
-    <div id="canti-list"></div>${viewTesti()}${viewFolders()}`;
+    <div id="canti-list"></div>${viewFolders()}`;
 }
 function renderCanti(){
   const box=document.getElementById('canti-list');if(!box)return;
@@ -1146,18 +897,8 @@ function renderCanti(){
   box.innerHTML=groups.map(([k,l,arr])=>`<details class="grp" ${open||S.openGrp===k?'open':''} data-grp="${k}"><summary><h3>${esc(l)}</h3><span class="n">${arr.length} canti <span class="chev">${ic('chev',16)}</span></span></summary>
     ${arr.slice().sort((a,b)=>a.titolo.localeCompare(b.titolo,'it')).map(c=>`<div class="canto"><div class="bd"><div class="tt">${esc(c.titolo)}${c.tempo&&c.tempo!=='ordinario'?tl(c.tempo):''}</div>${c.autore?`<div class="au">${esc(c.autore)}</div>`:''}</div>
       ${audiosFor(c.id).length?`<span class="muted" title="Audio disponibile">${ic('wave',16)}</span>`:''}
-      ${testoFor(c)?txPill(testoFor(c),1):''}
       ${cUrl(c)?`<a class="pill-btn" href="${esc(safeUrl(cUrl(c)))}" target="_blank" rel="noopener">${ic('doc',14)}Spartito</a>`:''}
       ${can.canti()?`<button class="lnk" data-act="canto-edit" data-id="${esc(c.id)}">Modifica</button>`:''}</div>`).join('')}</details>`).join('');
-}
-function viewTesti(){
-  const list=S.testi.map((t,i)=>({t,i})).sort((a,b)=>a.t.titolo.localeCompare(b.t.titolo,'it'));
-  const inf=S.testiInfo||{};
-  const bar=can3.proj()?`<div class="syncbar"><span><span class="dot ${S.txSync?'busy':''}"></span>${S.txSync?'Lettura della cartella Drive dei testi in corso…':`Testi letti dalla cartella Drive dei testi · si aggiornano da soli ogni 15 minuti${inf.at?' · ultimo controllo '+fWhen(inf.at):''}${inf.pending?` · ancora ${inf.pending} da leggere`:''}`}</span>${S.txSync?'':`<button class="btn ghost sm" data-act="tx-sync">${ic('sync',14)}Aggiorna testi</button>`}</div>
-    ${inf.skip&&inf.skip.length?`<div class="warn"><b>File non letti:</b><br>${inf.skip.map(esc).join('<br>')}</div>`:''}`:'';
-  return `<div class="sec-h"><h2>Testi e accordi</h2>${can3.proj()&&list.length?`<button class="btn ghost sm" data-act="libretto">${ic('book',14)}Crea libretto</button>`:''}</div>${bar}
-  ${list.length?`<div class="card tx-list">${list.map(({t,i})=>{const c=cantoFor(t);return `<div class="canto"><div class="bd"><div class="tt">${esc(t.titolo)}</div><div class="au">${esc([c?MOM_L[c.momento]:'',t.tono&&songHasCh(t)?'Tonalità '+t.tono:(songHasCh(t)?'con accordi':'')].filter(Boolean).join(' · '))}</div></div>
-    <button class="pill-btn" data-act="testo" data-tx="${i}">Apri</button>${can3.proj()?`<button class="pill-btn" data-act="proj-tx" data-tx="${i}">▶ Proietta</button>`:''}</div>`;}).join('')}</div>`:`<div class="empty">Nessun testo ancora caricato.</div>`}`;
 }
 function viewFolders(){
   return `<div class="sec-h"><h2>Cartelle su Drive</h2>${can.links()?`<button class="btn ghost sm" data-act="link-new">${ic('plus',14,2.2)}Aggiungi cartella</button>`:''}</div>
@@ -1185,7 +926,7 @@ function viewSettings(){
   return `<div class="page-head"><div><div class="eyebrow">Solo direttore</div><h1>Impostazioni</h1></div></div>
   <div class="card">
     <div class="set-row"><div><div class="k">Parrocchia, coro e direttore</div><div class="v">${esc(cfg('parrocchia'))} · ${esc(nome())} · ${esc(cfg('sottotitolo'))}</div></div><button class="btn ghost sm" data-act="set-name">Modifica</button></div>
-    <div class="set-row"><div><div class="k">Notifiche push</div><div class="v">${S.notif&&S.notif.appId?'Attive: il coro riceve un avviso per ogni nuovo programma, prova o appuntamento':'Non configurate'}</div></div><button class="btn ghost sm" data-act="set-notif">${S.notif&&S.notif.appId?'Modifica':'Configura'}</button></div>
+    <div class="set-row"><div><div class="k">Notifiche push</div><div class="v">${S.notif&&S.notif.appId?'Attive: il coro riceve un avviso per ogni nuovo programma, prova o appuntamento':'Non configurate'}${S.notif&&S.notif.last?`<br><span style="color:${S.notif.last.ok?'#2f6a43':'#a23b3b'}">Ultimo invio (${esc(fWhen(S.notif.last.ts))}): ${S.notif.last.ok?'inviata'+(S.notif.last.count!=null?' a '+S.notif.last.count+' telefoni':''):'non riuscito – '+esc(S.notif.last.msg||'')}</span>`:''}</div></div><button class="btn ghost sm" data-act="set-notif">${S.notif&&S.notif.appId?'Modifica':'Configura'}</button></div>
     ${Object.entries(ROLES).map(([k,r])=>`<div class="set-row"><div><div class="k">Password ${r.label}</div><div class="v">${pw[k]?'Impostata':'Nessuna password: accesso libero'}</div></div><button class="btn ghost sm" data-act="set-pw" data-role="${k}">Cambia</button></div>`).join('')}
   </div>
   <p class="muted" style="font-size:13px;margin-top:14px">Le password separano le tre aree dell'app: il server controlla ogni modifica, quindi chi entra come corista può solo consultare.</p>`;
@@ -1247,7 +988,7 @@ function progForm(p,dup,prefill){
     <div class="field"><label>Luogo (facoltativo)</label><input id="luogo" maxlength="120" value="${esc(base.luogo)}"></div></div>
     <div class="field"><label style="display:flex;justify-content:space-between;align-items:center">Canti per momento della Messa<button type="button" class="btn ghost sm" id="auto">${ic('M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6l-4.9 3.6 1.9-5.8L4 8.8h6.1z',14)}Proponi canti</button></label><div class="status" id="autost"></div><div id="moms"></div><select id="addm" style="border:1px dashed var(--line);border-radius:10px;padding:9px 10px;background:#fff"></select></div>
     <div class="field"><label>Note per il coro (facoltative)</label><textarea id="note" maxlength="1500">${esc(base.note)}</textarea></div>
-    ${foot('Salva programma')}</form>`,m=>{
+    ${avvisaBox(isNew)}${foot('Salva programma')}</form>`,m=>{
     draw(m);
     m.querySelector('#data').addEventListener('change',()=>{const t=tempoDi(m.querySelector('#data').value);const sel=m.querySelector('#tempo');sel.value=t.mariano&&t.tempo==='ordinario'?'mariano':t.tempo;draw(m);});
     m.querySelector('#auto').onclick=async()=>{const b=m.querySelector('#auto'),stt=m.querySelector('#autost');b.disabled=true;stt.textContent='Leggo le letture e preparo la proposta…';
@@ -1270,8 +1011,8 @@ function progForm(p,dup,prefill){
       order.splice(idx,0,k);picks[k]=[''];draw(m);};
     m.querySelector('#f').onsubmit=e=>{e.preventDefault();const g=id=>m.querySelector('#'+id).value.trim();
       const scelte=[];order.forEach(k=>picks[k].forEach(c=>{if(c)scelte.push({m:k,c});}));
-      const d={data:g('data'),ora:g('ora'),tempo:g('tempo'),titolo:g('titolo'),luogo:g('luogo'),note:g('note'),scelte,updatedAt:Date.now()};
-      guard(m,async()=>{const r=await api('saveProg',S.token,isNew?null:p.id,d);S.selProg=r.savedId;apply(r);toast('Programma salvato');});};
+      const d={data:g('data'),ora:g('ora'),tempo:g('tempo'),titolo:g('titolo'),luogo:g('luogo'),note:g('note'),scelte,updatedAt:Date.now(),avvisa:avvisaVal(m)};
+      guard(m,async()=>{const r=await api('saveProg',S.token,isNew?null:p.id,d);S.selProg=r.savedId;apply(r);notifToast('Programma salvato',r.notifResult);});};
   },true);
 }
 
@@ -1284,10 +1025,10 @@ function apptForm(a){
     <div class="field"><label>Data</label><input id="data" type="date" required value="${esc(a.data)}"></div></div>
     <div class="row2"><div class="field"><label>Ora inizio</label><input id="ora" type="time" value="${esc(a.ora)}"></div><div class="field"><label>Ora fine</label><input id="oraFine" type="time" value="${esc(a.oraFine)}"></div></div>
     <div class="field"><label>Luogo</label><input id="luogo" maxlength="160" value="${esc(a.luogo)}"></div>
-    <div class="field"><label>Note per i coristi</label><textarea id="note" maxlength="2000">${esc(a.note)}</textarea></div>${foot()}</form>`,m=>{
+    <div class="field"><label>Note per i coristi</label><textarea id="note" maxlength="2000">${esc(a.note)}</textarea></div>${avvisaBox(!a.id)}${foot()}</form>`,m=>{
     m.querySelector('#f').onsubmit=e=>{e.preventDefault();const g=id=>m.querySelector('#'+id).value.trim();
-      const d={titolo:g('titolo'),tipo:g('tipo'),data:g('data'),ora:g('ora'),oraFine:g('oraFine'),luogo:g('luogo'),note:g('note'),updatedAt:Date.now()};
-      guard(m,async()=>{apply(await api('saveAppt',S.token,a.id||null,d));toast('Appuntamento salvato');});};
+      const d={titolo:g('titolo'),tipo:g('tipo'),data:g('data'),ora:g('ora'),oraFine:g('oraFine'),luogo:g('luogo'),note:g('note'),updatedAt:Date.now(),avvisa:avvisaVal(m)};
+      guard(m,async()=>{const r=await api('saveAppt',S.token,a.id||null,d);apply(r);notifToast('Appuntamento salvato',r.notifResult);});};
   });
 }
 
@@ -1408,11 +1149,8 @@ $app.addEventListener('click',e=>{
     case 'prog-sel':S.selProg=id;S.playing=null;render();window.scrollTo(0,0);break;
     case 'prog-new':progForm();break;
     case 'proposta':propostaForm();break;
-    case 'testo':testoView(+el.dataset.tx);break;
-    case 'proj-tx':{const t=S.testi[+el.dataset.tx];if(t){const c=cantoFor(t);project([{t,lab:c?(MOM_L[c.momento]||''):''}]);}break;}
-    case 'proj-prog':projectProg(id);break;
-    case 'tx-sync':if(!S.txSync){S.txSync=true;render();api('syncTesti',S.token).then(d=>{S.txSync=false;apply(d);const r=d.syncTesti||{};toast(r.busy?'Lettura già in corso, riprova tra poco':r.letti?`${r.letti} ${r.letti===1?'testo letto':'testi letti'}${r.restanti?' · altri '+r.restanti+' tra poco':''}`:'Nessun testo nuovo o modificato');}).catch(e=>{S.txSync=false;render();toast(errMsg(e));});}break;
-    case 'libretto':if(!S.testi.length)toast('Nessun testo caricato');else librettoForm(id||null);break;
+    case 'notif-send':{const k=el.dataset.kind;const lab=k==='prova'?'questa prova':k==='prog'?'questo programma':'questo appuntamento';
+      confirmBox('Avvisare il coro?','Invio una notifica a tutti i telefoni iscritti per '+lab+'.','Invia notifica',async()=>{const r=await api('resendNotif',S.token,k,id);toast(r,5000);await loadAll();});break;}
     case 'prova-new':provaForm();break;
     case 'prova-edit':provaForm(find(S.prove));break;
     case 'prova-del':{const p=find(S.prove);confirmBox('Eliminare la prova?',`La prova del ${fLong(p.data)} verrà eliminata.`,'Elimina',async()=>apply(await api('delProva',S.token,id)));break;}
@@ -1445,7 +1183,6 @@ $app.addEventListener('click',e=>{
 render();
 api('publicInfo').then(p=>{S.pub=p;initPush();render();}).catch(()=>{S.netErr=true;render();});
 if(S.token)loadAll();
-loadTesti();
 setInterval(()=>{if(S.token&&document.visibilityState==='visible'&&!busy&&$modal.classList.contains('hidden'))loadAll();},120000);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&S.token&&Date.now()-(S.lastLoad||0)>30000)loadAll();});
 })();
